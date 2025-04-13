@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Jerusalem Church Belgium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode header {
+            background-color: rgba(30,30,30,0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .dark-mode nav ul li a {
+            color: #f5f5f5;
+        }
+        
+        nav ul li a:hover {
+            color: #4a6fa5;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 15px;
+            background-color: #4a6fa5;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: calc(100% - 30px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4a6fa5;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Radio Float Button */
+        .radio-float {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .radio-float:hover {
+            transform: scale(1.1);
+        }
+        
+        .radio-float a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4a6fa5 0%, #e74c3c 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #4a6fa5;
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            border-color: white;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: #4a6fa5;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #4a6fa5;
+            margin: 15px auto 0;
+        }
+        
+        .dark-mode h2 {
+            color: #6d9eeb;
+        }
+        
+        .dark-mode h2::after {
+            background: #6d9eeb;
+        }
+        
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .about-item {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .about-item {
+            background: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .about-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-item i {
+            font-size: 3rem;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .about-item:hover i {
+            transform: scale(1.1);
+        }
+        
+        .about-item h3 {
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-item {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .service-item {
+            background: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-item i {
+            font-size: 3rem;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .service-item:hover i {
+            transform: scale(1.1);
+        }
+        
+        .service-item h3 {
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Events Section */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .event-item {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .event-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: #4a6fa5;
+        }
+        
+        .dark-mode .event-item {
+            background: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .event-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .event-item h3 {
+            color: #4a6fa5;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .event-item p {
+            margin-bottom: 10px;
+        }
+        
+        .event-item p:first-of-type {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .special-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        /* Radio Section */
+        .radio {
+            background: #f5f9ff;
+            text-align: center;
+        }
+        
+        .dark-mode .radio {
+            background: #1a1a2e;
+        }
+        
+        .radio-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .btn-radio {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            background: #e74c3c;
+            padding: 12px 35px;
+            border-radius: 30px;
+            border: 2px solid transparent;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-radio:hover {
+            background: transparent;
+            border-color: #e74c3c;
+            color: #e74c3c;
+            transform: translateY(-3px);
+        }
+        
+        /* Sermons Section */
+        .sermons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .sermon-item {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .sermon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode .sermon-item {
+            background: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .sermon-item h3 {
+            color: #4a6fa5;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .sermon-item h4 {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        .dark-mode .sermon-item h4 {
+            color: #aaa;
+        }
+        
+        .speaker {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #777;
+        }
+        
+        .dark-mode .speaker {
+            color: #999;
+        }
+        
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 30px;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 40px 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode .contact-item {
+            background: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .contact-item i {
+            font-size: 2.5rem;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover i {
+            transform: scale(1.1);
+        }
+        
+        .contact-item a {
+            color: #4a6fa5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-item a:hover {
+            color: #e74c3c;
+            text-decoration: underline;
+        }
+        
+        .dark-mode .contact-item a {
+            color: #6d9eeb;
+        }
+        
+        /* Footer */
+        footer {
+            background: #4a6fa5;
+            color: white;
+            text-align: center;
+            padding: 50px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #4a6fa5 0%, #e74c3c 100%);
+        }
+        
+        .dark-mode footer {
+            background: #1e1e1e;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            color: #ddd;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease;
+            }
+            
+            .dark-mode nav {
+                background: #1e1e1e;
+            }
+            
+            nav.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            nav ul li {
+                text-align: center;
+                margin: 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark/Light Mode Toggle -->
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Floating Radio Button -->
+    <div class="radio-float">
+        <a href="http://tcradios.njcbelgium.be" target="_blank" title="Listen to Radio">
+            <i class="fas fa-broadcast-tower"></i>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://i.ibb.co/rRtz0tGT/Logo.png" alt="New Jerusalem Church Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#sermons">Sermons</a></li>
+                    <li><a href="#radio">Radio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Welcome to New Jerusalem Church Belgium</h1>
+            <p>A place of worship, fellowship, and spiritual growth in the heart of Antwerp</p>
+            <a href="#about" class="btn">Discover Our Community</a>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are a vibrant community of believers dedicated to spreading the love of Christ through worship, service, and fellowship. Our church family welcomes everyone seeking spiritual growth and connection.</p>
+            <div class="about-grid">
+                <div class="about-item">
+                    <i class="fas fa-church"></i>
+                    <h3>Our History</h3>
+                    <p>Founded in 1968 in India, we have been serving the spiritual needs of our community in Belgium for decades, maintaining our rich traditions while embracing our multicultural congregation.</p>
+                </div>
+                
+                <div class="about-item">
+                    <i class="fas fa-cross"></i>
+                    <h3>Our Mission</h3>
+                    <p>To share the transformative Gospel of Jesus Christ, nurture spiritual growth, and serve our community with love and compassion, following Christ's example.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-pray"></i>
+                    <h3>Sunday Worship</h3>
+                    <p>Join us every Sunday at 14:30 for our main worship service featuring inspiring messages, prayer, and uplifting music in a welcoming atmosphere.</p>
+                </div>
+                
+                <div class="service-item">
+                    <i class="fas fa-hands-praying"></i>
+                    <h3>Prayer Meetings</h3>
+                    <p>Every 2nd and 4th Saturday at 5:00 PM, we gather for powerful prayer sessions where we intercede for our church, community, and world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <h2>Upcoming Events</h2>
+            <div class="events-grid" id="events-container">
+                <div class="event-item">
+                    <h3>Loading Events...</h3>
+                    <p>Please wait while we load upcoming events</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sermons -->
+    <section id="sermons" class="sermons">
+        <div class="container">
+            <h2>Sermons</h2>
+            <div class="sermons-grid">
+                <div class="sermon-item">
+                    <h3>Lord's Supper</h3>
+                    <h4>கர்த்தரின் பந்தி</h4>
+                    <p class="speaker">Pastor Simson</p>
+                    <audio controls>
+                        <source src="https://archive.org/download/aud-20220912-wa-0004/AUD-20250406-WA0003.m4a" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Radio Section -->
+    <section id="radio" class="radio">
+        <div class="container">
+            <h2>Listen to Our Radio</h2>
+            <div class="radio-content">
+                <p>Experience uplifting Christian programming, worship music, and biblical teaching through our 24/7 online radio station.</p>
+                <a href="http://tcradios.njcbelgium.be" target="_blank" class="btn btn-radio">
+                    <i class="fas fa-broadcast-tower"></i> Tune In Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Address</h3>
+                    <p>New Jerusalem Church<br>
+                     Ten Eekhovelei 292,<br> 
+                     2100 Antwerpen, Belgium</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Telephone</h3>
+                    <p><a href="tel:+32483116484">+32 483 11 64 84</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p><a href="mailto:simsonpeter@gmail.com">simsonpeter@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 New Jerusalem Church Belgium. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
+            });
+        });
+        
+        // Dark/Light Mode Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
+            });
+        });
+
+        // GitHub configuration
+        const GITHUB_RAW_URL = "https://raw.githubusercontent.com/yourusername/yourrepo/main/";
+        const EVENTS_FILE = "events.json";
+        
+        async function generateEvents() {
+            const eventsContainer = document.getElementById('events-container');
+            
+            try {
+                // 1. Fetch special events from GitHub
+                const specialEvents = await fetchSpecialEvents();
+                
+                // 2. Generate regular events
+                const regularEvents = generateRegularEvents();
+                
+                // 3. Combine and sort all events by date
+                const allEvents = [...specialEvents, ...regularEvents]
+                    .sort((a, b) => new Date(a.date) - new Date(b.date));
+                
+                // 4. Display up to 4 closest events
+                displayEvents(allEvents.slice(0, 4));
+                
+            } catch (error) {
+                console.error("Error generating events:", error);
+                // Fallback to regular events if there's an error
+                displayEvents(generateRegularEvents().slice(0, 4));
+            }
+        }
+
+        async function fetchSpecialEvents() {
+            try {
+                const response = await fetch(`${GITHUB_RAW_URL}${EVENTS_FILE}`);
+                if (!response.ok) throw new Error("Failed to fetch events");
+                const events = await response.json();
+                
+                // Validate and format the events
+                return events.map(event => ({
+                    title: event.title || "Special Event",
+                    date: event.date || new Date().toISOString().split('T')[0],
+                    time: event.time || "2:30 PM",
+                    description: event.description || "Join us for this special event",
+                    isSpecial: true
+                }));
+                
+            } catch (error) {
+                console.error("Error fetching special events:", error);
+                return []; // Return empty array if fetch fails
+            }
+        }
+
+        function generateRegularEvents() {
+            const today = new Date();
+            const events = [];
+            
+            // 1. Next Sunday Service
+            const nextSunday = getNextDayOfWeek(today, 0);
+            events.push({
+                title: "Sunday Worship Service",
+                date: nextSunday.toISOString().split('T')[0],
+                time: "2:30 PM",
+                description: "Join us for our weekly worship service with inspiring messages and fellowship."
+            });
+            
+            // 2. Next Prayer Meetings (2nd and 4th Saturdays)
+            const prayerMeetings = getNextPrayerMeetings(today);
+            prayerMeetings.forEach(meeting => {
+                events.push({
+                    title: "Monthly Prayer Meeting",
+                    date: meeting.date.toISOString().split('T')[0],
+                    time: "5:00 PM",
+                    description: "Our monthly prayer gathering for the church and community."
+                });
+            });
+            
+            return events;
+        }
+
+        function displayEvents(events) {
+            const eventsContainer = document.getElementById('events-container');
+            
+            if (events.length === 0) {
+                eventsContainer.innerHTML = `
+                    <div class="event-item">
+                        <h3>Weekly Worship Service</h3>
+                        <p>Every Sunday | 2:30 PM</p>
+                        <p>Join us for our regular Sunday worship service.</p>
+                    </div>
+                    <div class="event-item">
+                        <h3>Monthly Prayer Meeting</h3>
+                        <p>2nd & 4th Saturdays | 5:00 PM</p>
+                        <p>Our bi-monthly prayer gatherings.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            eventsContainer.innerHTML = events.map(event => `
+                <div class="event-item">
+                    <h3>${event.title}</h3>
+                    <p>${formatDisplayDate(event.date)} | ${event.time}</p>
+                    <p>${event.description}</p>
+                    ${event.isSpecial ? '<div class="special-badge">Special Event</div>' : ''}
+                </div>
+            `).join('');
+        }
+
+        // Helper function to get next specific day of week
+        function getNextDayOfWeek(fromDate, dayOfWeek) {
+            const date = new Date(fromDate);
+            date.setDate(date.getDate() + (dayOfWeek + 7 - date.getDay()) % 7);
+            // If today is the day, return next week's date
+            if (date <= fromDate) date.setDate(date.getDate() + 7);
+            return date;
+        }
+
+        // Helper function to get next 2nd and 4th Saturdays
+        function getNextPrayerMeetings(fromDate) {
+            const date = new Date(fromDate);
+            const currentMonth = date.getMonth();
+            const currentYear = date.getFullYear();
+            
+            // Find all Saturdays in the current month
+            let saturdays = [];
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const testDate = new Date(currentYear, currentMonth, day);
+                if (testDate.getDay() === 6) { // 6 = Saturday
+                    saturdays.push(new Date(testDate));
+                }
+            }
+            
+            // Get 2nd and 4th Saturdays
+            const secondSaturday = saturdays[1];
+            const fourthSaturday = saturdays[3];
+            
+            // Determine which ones are upcoming
+            const upcomingMeetings = [];
+            
+            if (secondSaturday >= fromDate) {
+                upcomingMeetings.push({ date: secondSaturday });
+            }
+            if (fourthSaturday >= fromDate) {
+                upcomingMeetings.push({ date: fourthSaturday });
+            }
+            
+            // If no meetings left this month, get next month's
+            if (upcomingMeetings.length < 2) {
+                const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+                const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+                saturdays = [];
+                
+                const daysInNextMonth = new Date(nextYear, nextMonth + 1, 0).getDate();
+                for (let day = 1; day <= daysInNextMonth; day++) {
+                    const testDate = new Date(nextYear, nextMonth, day);
+                    if (testDate.getDay() === 6) {
+                        saturdays.push(new Date(testDate));
+                    }
+                }
+                
+                if (upcomingMeetings.length === 0) {
+                    // Add both from next month
+                    upcomingMeetings.push(
+                        { date: saturdays[1] }, // 2nd Saturday
+                        { date: saturdays[3] }  // 4th Saturday
+                    );
+                } else {
+                    // Add just the 2nd Saturday from next month
+                    upcomingMeetings.push({ date: saturdays[1] });
+                }
+            }
+            
+            return upcomingMeetings.slice(0, 2); // Return max 2 upcoming meetings
+        }
+
+        // Helper function to format date for display
+        function formatDisplayDate(dateString) {
+            const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Generate events when page loads
+        document.addEventListener('DOMContentLoaded', generateEvents);
+    </script>
+</body>
+</html>
