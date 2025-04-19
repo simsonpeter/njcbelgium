@@ -1,16 +1,9 @@
-[
-    {
-        "title": "Good Friday Service",
-        "date": "2025-04-18",
-        "time": "06:00 PM",
-        "description": "Special Good Friday Service with communion",
-        "isSpecial": true
-    },
-    {
+[ {
         "title": "Easter Sunday Service",
         "date": "2025-04-20",
         "time": "02:30 PM",
         "description": "Special Easter Sunday celebration with communion",
         "isSpecial": true
     }
+
 ]
