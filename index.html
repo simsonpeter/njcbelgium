@@ -747,15 +747,10 @@
     <section id="sermons" class="sermons">
         <div class="container">
             <h2>Sermons</h2>
-            <div class="sermons-grid">
+            <div class="sermons-grid" id="sermons-container">
                 <div class="sermon-item">
-                    <h3>Lord's Supper</h3>
-                    <h4>கர்த்தரின் பந்தி</h4>
-                    <p class="speaker">Pastor Simson</p>
-                    <audio controls>
-                        <source src="https://archive.org/download/aud-20220912-wa-0004/AUD-20250406-WA0003.m4a" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <h3>Loading Sermons...</h3>
+                    <p>Please wait while we load the sermon recordings</p>
                 </div>
             </div>
         </div>
@@ -764,7 +759,7 @@
     <!-- Radio Section -->
     <section id="radio" class="radio">
         <div class="container">
-            <h2>Listen to Our Radio</h2>
+            <h2>Listen to TC Radios</h2>
             <div class="radio-content">
                 <p>Experience uplifting Christian programming, worship music, and biblical teaching through our 24/7 online radio station.</p>
                 <a href="http://tcradios.njcbelgium.be" target="_blank" class="btn btn-radio">
@@ -871,80 +866,114 @@
             });
         });
 
-        // GitHub configuration
-        const GITHUB_RAW_URL = "https://raw.githubusercontent.com/yourusername/yourrepo/main/";
-        const EVENTS_FILE = "events.json";
-        
-        async function generateEvents() {
-            const eventsContainer = document.getElementById('events-container');
-            
-            try {
-                // 1. Fetch special events from GitHub
-                const specialEvents = await fetchSpecialEvents();
-                
-                // 2. Generate regular events
-                const regularEvents = generateRegularEvents();
-                
-                // 3. Combine and sort all events by date
-                const allEvents = [...specialEvents, ...regularEvents]
-                    .sort((a, b) => new Date(a.date) - new Date(b.date));
-                
-                // 4. Display up to 4 closest events
-                displayEvents(allEvents.slice(0, 4));
-                
-            } catch (error) {
-                console.error("Error generating events:", error);
-                // Fallback to regular events if there's an error
-                displayEvents(generateRegularEvents().slice(0, 4));
-            }
+        // Event Generation Code with Belgian Timezone Fix and English Day Names
+        function getBelgianDate() {
+            // Create date in Belgian timezone
+            const now = new Date();
+            return new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Brussels' }));
         }
 
-        async function fetchSpecialEvents() {
-            try {
-                const response = await fetch(`${GITHUB_RAW_URL}${EVENTS_FILE}`);
-                if (!response.ok) throw new Error("Failed to fetch events");
-                const events = await response.json();
-                
-                // Validate and format the events
-                return events.map(event => ({
-                    title: event.title || "Special Event",
-                    date: event.date || new Date().toISOString().split('T')[0],
-                    time: event.time || "2:30 PM",
-                    description: event.description || "Join us for this special event",
-                    isSpecial: true
-                }));
-                
-            } catch (error) {
-                console.error("Error fetching special events:", error);
-                return []; // Return empty array if fetch fails
+        function getNthDayOfMonth(year, month, dayOfWeek, nth) {
+            const date = new Date(year, month, 1);
+            let count = 0;
+            const days = [];
+            
+            while (date.getMonth() === month) {
+                if (date.getDay() === dayOfWeek) {
+                    days.push(new Date(date));
+                    count++;
+                }
+                date.setDate(date.getDate() + 1);
             }
+            
+            if (nth <= days.length) {
+                return new Date(days[nth - 1]);
+            }
+            return null;
         }
 
-        function generateRegularEvents() {
-            const today = new Date();
-            const events = [];
+        function getNextPrayerMeetings(fromDate) {
+            const date = new Date(fromDate);
+            const currentMonth = date.getMonth();
+            const currentYear = date.getFullYear();
             
-            // 1. Next Sunday Service
-            const nextSunday = getNextDayOfWeek(today, 0);
-            events.push({
-                title: "Sunday Worship Service",
-                date: nextSunday.toISOString().split('T')[0],
-                time: "2:30 PM",
-                description: "Join us for our weekly worship service with inspiring messages and fellowship."
-            });
+            // Get 2nd and 4th Saturdays for current month
+            const secondSaturday = getNthDayOfMonth(currentYear, currentMonth, 6, 2);
+            const fourthSaturday = getNthDayOfMonth(currentYear, currentMonth, 6, 4);
             
-            // 2. Next Prayer Meetings (2nd and 4th Saturdays)
-            const prayerMeetings = getNextPrayerMeetings(today);
-            prayerMeetings.forEach(meeting => {
-                events.push({
-                    title: "Monthly Prayer Meeting",
-                    date: meeting.date.toISOString().split('T')[0],
+            const upcomingMeetings = [];
+            
+            // Check if 2nd Saturday is in the future
+            if (secondSaturday && secondSaturday >= fromDate) {
+                upcomingMeetings.push({ 
+                    title: "Prayer Meeting",
+                    date: secondSaturday,
                     time: "5:00 PM",
-                    description: "Our monthly prayer gathering for the church and community."
+                    description: "Our prayer gathering for the church and community."
                 });
-            });
+            }
             
-            return events;
+            // Check if 4th Saturday is in the future
+            if (fourthSaturday && fourthSaturday >= fromDate) {
+                upcomingMeetings.push({ 
+                    title: "Prayer Meeting",
+                    date: fourthSaturday,
+                    time: "5:00 PM",
+                    description: "Our prayer gathering for the church and community."
+                });
+            }
+            
+            // If we don't have enough meetings, look in next month
+            if (upcomingMeetings.length < 2) {
+                const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+                const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+                
+                const nextMonthSecondSat = getNthDayOfMonth(nextYear, nextMonth, 6, 2);
+                if (nextMonthSecondSat) {
+                    upcomingMeetings.push({ 
+                        title: "Prayer Meeting",
+                        date: nextMonthSecondSat,
+                        time: "5:00 PM",
+                        description: "Our prayer gathering for the church and community."
+                    });
+                }
+                
+                if (upcomingMeetings.length < 2) {
+                    const nextMonthFourthSat = getNthDayOfMonth(nextYear, nextMonth, 6, 4);
+                    if (nextMonthFourthSat) {
+                        upcomingMeetings.push({ 
+                            title: "Prayer Meeting",
+                            date: nextMonthFourthSat,
+                            time: "5:00 PM",
+                            description: "Our prayer gathering for the church and community."
+                        });
+                    }
+                }
+            }
+            
+            return upcomingMeetings.slice(0, 2);
+        }
+
+        function getNextSunday(fromDate) {
+            const date = new Date(fromDate);
+            // Find next Sunday (0 = Sunday)
+            date.setDate(date.getDate() + (7 - date.getDay()) % 7);
+            // If today is Sunday, return next week's Sunday
+            if (date <= fromDate) date.setDate(date.getDate() + 7);
+            return date;
+        }
+
+        function formatEventDate(date) {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                           'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const dayName = days[date.getDay()];
+            const day = date.getDate();
+            const monthName = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${dayName}, ${monthName} ${day}, ${year}`;
         }
 
         function displayEvents(events) {
@@ -953,12 +982,12 @@
             if (events.length === 0) {
                 eventsContainer.innerHTML = `
                     <div class="event-item">
-                        <h3>Weekly Worship Service</h3>
+                        <h3>Sunday Worship Service</h3>
                         <p>Every Sunday | 2:30 PM</p>
                         <p>Join us for our regular Sunday worship service.</p>
                     </div>
                     <div class="event-item">
-                        <h3>Monthly Prayer Meeting</h3>
+                        <h3>Prayer Meeting</h3>
                         <p>2nd & 4th Saturdays | 5:00 PM</p>
                         <p>Our bi-monthly prayer gatherings.</p>
                     </div>
@@ -969,90 +998,87 @@
             eventsContainer.innerHTML = events.map(event => `
                 <div class="event-item">
                     <h3>${event.title}</h3>
-                    <p>${formatDisplayDate(event.date)} | ${event.time}</p>
+                    <p>${formatEventDate(event.date)} | ${event.time}</p>
                     <p>${event.description}</p>
                     ${event.isSpecial ? '<div class="special-badge">Special Event</div>' : ''}
                 </div>
             `).join('');
         }
 
-        // Helper function to get next specific day of week
-        function getNextDayOfWeek(fromDate, dayOfWeek) {
-            const date = new Date(fromDate);
-            date.setDate(date.getDate() + (dayOfWeek + 7 - date.getDay()) % 7);
-            // If today is the day, return next week's date
-            if (date <= fromDate) date.setDate(date.getDate() + 7);
-            return date;
-        }
-
-        // Helper function to get next 2nd and 4th Saturdays
-        function getNextPrayerMeetings(fromDate) {
-            const date = new Date(fromDate);
-            const currentMonth = date.getMonth();
-            const currentYear = date.getFullYear();
+        // Sermons Loading from GitHub
+        async function loadSermons() {
+            const sermonsContainer = document.getElementById('sermons-container');
             
-            // Find all Saturdays in the current month
-            let saturdays = [];
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-            
-            for (let day = 1; day <= daysInMonth; day++) {
-                const testDate = new Date(currentYear, currentMonth, day);
-                if (testDate.getDay() === 6) { // 6 = Saturday
-                    saturdays.push(new Date(testDate));
-                }
-            }
-            
-            // Get 2nd and 4th Saturdays
-            const secondSaturday = saturdays[1];
-            const fourthSaturday = saturdays[3];
-            
-            // Determine which ones are upcoming
-            const upcomingMeetings = [];
-            
-            if (secondSaturday >= fromDate) {
-                upcomingMeetings.push({ date: secondSaturday });
-            }
-            if (fourthSaturday >= fromDate) {
-                upcomingMeetings.push({ date: fourthSaturday });
-            }
-            
-            // If no meetings left this month, get next month's
-            if (upcomingMeetings.length < 2) {
-                const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-                const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-                saturdays = [];
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/simsonpeter/njcbelgium/main/sermons.json');
+                if (!response.ok) throw new Error("Failed to fetch sermons");
+                const sermons = await response.json();
                 
-                const daysInNextMonth = new Date(nextYear, nextMonth + 1, 0).getDate();
-                for (let day = 1; day <= daysInNextMonth; day++) {
-                    const testDate = new Date(nextYear, nextMonth, day);
-                    if (testDate.getDay() === 6) {
-                        saturdays.push(new Date(testDate));
-                    }
+                if (sermons.length === 0) {
+                    sermonsContainer.innerHTML = `
+                        <div class="sermon-item">
+                            <h3>No Sermons Available</h3>
+                            <p>Check back later for new sermon recordings</p>
+                        </div>
+                    `;
+                    return;
                 }
                 
-                if (upcomingMeetings.length === 0) {
-                    // Add both from next month
-                    upcomingMeetings.push(
-                        { date: saturdays[1] }, // 2nd Saturday
-                        { date: saturdays[3] }  // 4th Saturday
-                    );
-                } else {
-                    // Add just the 2nd Saturday from next month
-                    upcomingMeetings.push({ date: saturdays[1] });
-                }
+                sermonsContainer.innerHTML = sermons.map(sermon => `
+                    <div class="sermon-item">
+                        <h3>${sermon.title || 'Sermon'}</h3>
+                        ${sermon.subtitle ? `<h4>${sermon.subtitle}</h4>` : ''}
+                        ${sermon.speaker ? `<p class="speaker">${sermon.speaker}</p>` : ''}
+                        <audio controls>
+                            <source src="${sermon.audioUrl}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error("Error loading sermons:", error);
+                sermonsContainer.innerHTML = `
+                    <div class="sermon-item">
+                        <h3>Lord's Supper</h3>
+                        <h4>கர்த்தரின் பந்தி</h4>
+                        <p class="speaker">Pastor Simson</p>
+                        <audio controls>
+                            <source src="https://archive.org/download/aud-20220912-wa-0004/AUD-20250406-WA0003.m4a" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                `;
             }
+        }
+
+        // Initialize events and sermons
+        function initializePage() {
+            const belgianDate = getBelgianDate();
             
-            return upcomingMeetings.slice(0, 2); // Return max 2 upcoming meetings
+            // Generate Sunday service
+            const sundayService = {
+                title: "Sunday Worship Service",
+                date: getNextSunday(belgianDate),
+                time: "2:30 PM",
+                description: "Join us for our weekly worship service with inspiring messages and fellowship."
+            };
+            
+            // Generate prayer meetings
+            const prayerMeetings = getNextPrayerMeetings(belgianDate);
+            
+            // Combine and sort all events
+            const allEvents = [sundayService, ...prayerMeetings]
+                .sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            displayEvents(allEvents.slice(0, 4));
+            
+            // Load sermons
+            loadSermons();
         }
 
-        // Helper function to format date for display
-        function formatDisplayDate(dateString) {
-            const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
-        }
-
-        // Generate events when page loads
-        document.addEventListener('DOMContentLoaded', generateEvents);
+        // Run when page loads
+        document.addEventListener('DOMContentLoaded', initializePage);
     </script>
 </body>
 </html>
