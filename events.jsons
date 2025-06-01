@@ -1,8 +1,9 @@
-[ {
-        "title": "Easter Sunday Service",
-        "date": "2025-04-20",
+[ 
+{
+        "title": "Pentocost Sunday Service",
+        "date": "2025-06-08",
         "time": "02:30 PM",
-        "description": "Special Easter Sunday celebration with communion",
+        "description": "Special Peticostal Sunday celebration with communion",
         "isSpecial": true
     }
 
