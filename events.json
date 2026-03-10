@@ -5,5 +5,12 @@
         "time": "02:30 PM",
         "description": "Special Penticostal Sunday celebration with communion",
         "isSpecial": true
+    },
+    {
+        "title": "Good Friday Service",
+        "date": "2026-04-03",
+        "time": "18:00 PM",
+        "description": "Remembering Cross",
+        "isSpecial": true
     }
 ]
