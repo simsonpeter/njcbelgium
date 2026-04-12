@@ -13,5 +13,13 @@
         "time": "02:30 PM",
         "description": "Special Easter Sunday celebration with communion",
         "isSpecial": true
-    }
+    },
+
+     {
+        "title": "Pentecostal Service",
+        "date": "2026-05-24",
+        "time": "02:30 PM",
+        "description": "Pentecostal celebration with communion",
+        "isSpecial": true
+     }
 ]
