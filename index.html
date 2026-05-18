@@ -3,52 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="New Jerusalem Church Belgium - worship, fellowship, prayer meetings, sermons, and TC Radios in Antwerp.">
-    <meta name="theme-color" content="#10192f">
+    <meta name="description" content="New Jerusalem Church Belgium - worship, prayer, sermons, and TC Radios in Antwerp.">
+    <meta name="theme-color" content="#101726">
     <title>New Jerusalem Church Belgium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f4f7fc;
-            --section: #ffffff;
-            --surface: rgba(255, 255, 255, 0.78);
-            --surface-strong: rgba(255, 255, 255, 0.96);
-            --surface-muted: #eef3ff;
-            --text: #23304a;
-            --text-muted: #66728a;
-            --heading: #10192f;
-            --primary: #4f6fff;
-            --primary-strong: #3955d1;
-            --accent: #ff7b6b;
-            --accent-strong: #ea5e50;
-            --success: #1f9b72;
-            --border: rgba(16, 25, 47, 0.08);
-            --chip-bg: rgba(79, 111, 255, 0.1);
-            --chip-text: #3955d1;
-            --shadow: 0 22px 60px rgba(16, 25, 47, 0.1);
-            --footer: #0a1020;
+            --bg: #f5f7fc;
+            --surface: rgba(255, 255, 255, 0.84);
+            --surface-strong: rgba(255, 255, 255, 0.98);
+            --surface-soft: #eef3ff;
+            --text: #2a3550;
+            --text-muted: #6f7a90;
+            --heading: #101726;
+            --primary: #536dfe;
+            --primary-soft: rgba(83, 109, 254, 0.1);
+            --accent: #ff7c6b;
+            --border: rgba(16, 23, 38, 0.08);
+            --shadow: 0 20px 48px rgba(16, 23, 38, 0.1);
         }
 
         body.dark-mode {
-            --bg: #070c17;
-            --section: #0b1222;
-            --surface: rgba(15, 23, 42, 0.76);
-            --surface-strong: rgba(15, 23, 42, 0.96);
-            --surface-muted: #121c33;
-            --text: #e7edff;
-            --text-muted: #aab4ca;
+            --bg: #060b15;
+            --surface: rgba(10, 18, 34, 0.82);
+            --surface-strong: rgba(14, 23, 42, 0.98);
+            --surface-soft: #101a31;
+            --text: #edf1ff;
+            --text-muted: #a7b2cb;
             --heading: #ffffff;
-            --primary: #86a0ff;
-            --primary-strong: #d8e0ff;
-            --accent: #ff9588;
-            --accent-strong: #ff7867;
-            --success: #4dd0a4;
-            --border: rgba(148, 163, 184, 0.15);
-            --chip-bg: rgba(134, 160, 255, 0.14);
-            --chip-text: #dbe4ff;
-            --shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
-            --footer: #030711;
+            --primary: #91a5ff;
+            --primary-soft: rgba(145, 165, 255, 0.14);
+            --accent: #ff9b8f;
+            --border: rgba(167, 178, 203, 0.14);
+            --shadow: 0 26px 56px rgba(0, 0, 0, 0.35);
         }
 
         * {
@@ -63,27 +51,18 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
             color: var(--text);
             background:
-                radial-gradient(circle at top left, rgba(79, 111, 255, 0.14), transparent 32%),
-                radial-gradient(circle at top right, rgba(255, 123, 107, 0.14), transparent 30%),
+                radial-gradient(circle at top left, rgba(83, 109, 254, 0.14), transparent 28%),
+                radial-gradient(circle at top right, rgba(255, 124, 107, 0.14), transparent 26%),
                 var(--bg);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body.nav-open {
             overflow: hidden;
-        }
-
-        ::selection {
-            background: rgba(79, 111, 255, 0.22);
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
         }
 
         a {
@@ -91,47 +70,15 @@
             text-decoration: none;
         }
 
-        button {
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button,
+        input,
+        audio {
             font: inherit;
-        }
-
-        main {
-            position: relative;
-            z-index: 1;
-            padding-top: 122px;
-        }
-
-        section {
-            scroll-margin-top: 128px;
-        }
-
-        .container {
-            width: min(1180px, calc(100% - 32px));
-            margin: 0 auto;
-        }
-
-        .surface-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(18px);
-        }
-
-        .skip-link {
-            position: absolute;
-            left: 16px;
-            top: -64px;
-            background: var(--heading);
-            color: #ffffff;
-            padding: 12px 18px;
-            border-radius: 999px;
-            z-index: 1200;
-            transition: top 0.2s ease;
-        }
-
-        .skip-link:focus {
-            top: 16px;
         }
 
         .sr-only {
@@ -145,64 +92,89 @@
             border: 0;
         }
 
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -64px;
+            z-index: 2000;
+            padding: 12px 16px;
+            border-radius: 999px;
+            background: var(--heading);
+            color: #ffffff;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
+        .container {
+            width: min(1080px, calc(100% - 28px));
+            margin: 0 auto;
+        }
+
+        .surface-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+
         header {
             position: fixed;
-            inset: 18px 0 auto;
+            top: 14px;
+            left: 0;
+            right: 0;
             z-index: 1000;
         }
 
-        .header-container {
+        .header-shell {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            padding: 14px 18px;
+            gap: 14px;
+            padding: 12px 14px;
+            border-radius: 999px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 999px;
             box-shadow: var(--shadow);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(18px);
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             min-width: 0;
         }
 
-        .logo-mark {
-            width: 58px;
-            height: 58px;
-            border-radius: 18px;
+        .brand-mark {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
             display: grid;
             place-items: center;
-            background: linear-gradient(135deg, rgba(79, 111, 255, 0.16), rgba(255, 123, 107, 0.16));
-            border: 1px solid rgba(79, 111, 255, 0.1);
+            background: linear-gradient(135deg, rgba(83, 109, 254, 0.18), rgba(255, 124, 107, 0.18));
+            border: 1px solid rgba(83, 109, 254, 0.12);
             flex-shrink: 0;
         }
 
-        .logo-mark img {
-            width: 44px;
-            height: 44px;
+        .brand-mark img {
+            width: 38px;
+            height: 38px;
             object-fit: contain;
         }
 
-        .brand-copy {
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }
-
         .brand-copy strong {
+            display: block;
             color: var(--heading);
-            font-size: 1rem;
-            line-height: 1.15;
+            font-size: 0.98rem;
+            line-height: 1.1;
         }
 
         .brand-copy span {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         nav {
@@ -210,162 +182,169 @@
         }
 
         nav ul {
-            list-style: none;
             display: flex;
             align-items: center;
             gap: 4px;
+            list-style: none;
         }
 
         nav a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 14px;
+            padding: 10px 13px;
             border-radius: 999px;
             color: var(--text-muted);
             font-weight: 600;
-            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         nav a:hover,
         nav a:focus-visible,
         nav a.is-current {
-            background: var(--chip-bg);
+            background: var(--primary-soft);
             color: var(--heading);
-            transform: translateY(-1px);
             outline: none;
         }
 
-        .menu-toggle {
+        .menu-toggle,
+        .theme-toggle-control {
             display: none;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            min-width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+
+        .menu-toggle {
             border: 0;
-            border-radius: 999px;
-            padding: 12px 16px;
             background: var(--heading);
             color: #ffffff;
-            cursor: pointer;
-            min-width: 52px;
         }
 
-        .floating-actions {
-            position: fixed;
-            right: 18px;
-            bottom: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 1100;
-        }
-
-        .theme-toggle,
-        .radio-float {
-            width: 56px;
-            height: 56px;
+        .theme-toggle-control {
             display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
             border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(18px);
-            transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .theme-toggle {
             background: var(--surface-strong);
             color: var(--heading);
-            cursor: pointer;
         }
 
-        .radio-float {
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            color: #ffffff;
+        main {
+            padding-top: 102px;
         }
 
-        .theme-toggle:hover,
-        .radio-float:hover {
-            transform: translateY(-2px);
+        section {
+            scroll-margin-top: 110px;
         }
 
-        .hero {
-            padding: 24px 0 40px;
+        .section {
+            padding: 28px 0;
         }
 
-        .hero-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.95fr);
-            gap: 28px;
-            align-items: stretch;
+        .section-heading {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            justify-content: space-between;
+            gap: 12px 20px;
+            margin-bottom: 18px;
         }
 
-        .hero-copy,
-        .hero-panel,
-        .metric-card,
-        .story-card,
-        .value-card,
-        .service-card,
-        .event-card,
-        .sermon-card,
-        .contact-card,
-        .radio-band,
-        .footer-shell {
-            background: var(--surface);
-        }
-
-        .hero-copy {
-            padding: 48px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-copy::before {
-            content: '';
-            position: absolute;
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            top: -120px;
-            right: -100px;
-            background: radial-gradient(circle, rgba(79, 111, 255, 0.18), transparent 68%);
+        .section-heading.compact {
+            margin-bottom: 14px;
         }
 
         .eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 14px;
+            padding: 7px 12px;
             border-radius: 999px;
-            background: var(--chip-bg);
-            color: var(--chip-text);
-            font-size: 0.78rem;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: 0.76rem;
             font-weight: 800;
             letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
-        .hero-copy h1 {
+        .section-copy h2,
+        .hero-copy h1,
+        .radio-copy h2 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 6vw, 5.2rem);
-            line-height: 0.98;
             color: var(--heading);
-            margin: 22px 0 20px;
-            max-width: 10ch;
+            line-height: 1.02;
         }
 
-        .hero-copy p {
-            font-size: 1.08rem;
+        .section-copy h2 {
+            font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+            margin-top: 10px;
+        }
+
+        .section-copy p,
+        .hero-copy p,
+        .hero-note,
+        .mini-card p,
+        .story-brief p,
+        .event-row p,
+        .detail-card p,
+        .radio-copy p,
+        .contact-line,
+        .footer-note {
             color: var(--text-muted);
-            max-width: 620px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .hero-copy,
+        .hero-aside,
+        .story-brief,
+        .mini-card,
+        .event-row,
+        .sermon-shell,
+        .player-card,
+        .sermon-list-card,
+        .radio-band,
+        .contact-card,
+        .footer-shell {
+            padding: 24px;
+        }
+
+        .hero-copy {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-copy::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: -70px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(83, 109, 254, 0.18), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-copy h1 {
+            font-size: clamp(2.7rem, 5vw, 4.4rem);
+            max-width: 8.5ch;
+            margin: 14px 0 14px;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 30px;
+            gap: 10px;
+            margin: 22px 0 16px;
         }
 
         .btn {
@@ -373,17 +352,17 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            min-height: 52px;
-            padding: 0 22px;
+            min-height: 48px;
+            padding: 0 18px;
             border-radius: 999px;
             border: 1px solid transparent;
             font-weight: 700;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 18px 38px rgba(16, 25, 47, 0.14);
+            box-shadow: 0 14px 34px rgba(16, 23, 38, 0.12);
         }
 
         .btn-primary {
@@ -397,405 +376,354 @@
             color: var(--heading);
         }
 
-        .hero-highlights {
+        .quick-tags,
+        .story-tags,
+        .radio-tags,
+        .event-meta,
+        .sermon-meta,
+        .mini-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 28px;
+            gap: 8px;
         }
 
-        .hero-highlights span,
+        .quick-tags span,
         .story-tags span,
-        .radio-features span,
-        .service-list li,
+        .radio-tags span,
         .event-meta span,
-        .sermon-meta span {
+        .sermon-meta span,
+        .mini-meta span {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 999px;
             background: var(--surface-strong);
             border: 1px solid var(--border);
-            color: var(--text);
-            font-size: 0.94rem;
+            font-size: 0.9rem;
         }
 
-        .hero-side {
-            display: grid;
-            gap: 20px;
-        }
-
-        .hero-panel {
-            padding: 34px;
-        }
-
-        .panel-kicker,
-        .card-kicker {
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .hero-panel h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--heading);
-            font-size: clamp(2rem, 4vw, 2.6rem);
-            line-height: 1.05;
-        }
-
-        .schedule-list {
+        .hero-stack {
             display: grid;
             gap: 14px;
-            margin-top: 24px;
         }
 
-        .schedule-item {
+        .mini-card h3,
+        .story-brief h3,
+        .player-card h3,
+        .sermon-item h3,
+        .detail-card h3,
+        .contact-card h3,
+        .event-row h3 {
+            color: var(--heading);
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+
+        .mini-card strong {
+            display: block;
+            color: var(--heading);
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .mini-grid,
+        .about-grid,
+        .detail-grid,
+        .contact-grid {
             display: grid;
-            grid-template-columns: 48px 1fr;
             gap: 14px;
-            align-items: start;
-            padding: 16px;
-            border-radius: 22px;
-            background: var(--surface-strong);
-            border: 1px solid var(--border);
         }
 
-        .schedule-item i,
-        .value-card .icon-wrap,
-        .service-card .icon-wrap,
-        .contact-card .icon-wrap {
-            width: 48px;
-            height: 48px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(79, 111, 255, 0.16), rgba(255, 123, 107, 0.18));
-            color: var(--primary);
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .schedule-item strong {
-            display: block;
-            color: var(--heading);
-            margin-bottom: 4px;
-        }
-
-        .schedule-item span {
-            display: block;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
-        }
-
-        .metric-card {
-            padding: 24px;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-        }
-
-        .metric-card strong {
-            display: block;
-            font-size: 2rem;
-            line-height: 1;
-            color: var(--heading);
-            margin-bottom: 10px;
-        }
-
-        .metric-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .section {
-            padding: 44px 0;
-        }
-
-        .section-heading {
-            text-align: center;
-            max-width: 760px;
-            margin: 0 auto 34px;
-        }
-
-        .section-heading .eyebrow {
-            margin-bottom: 18px;
-        }
-
-        .section-heading h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.3rem, 4vw, 3.4rem);
-            line-height: 1.04;
-            color: var(--heading);
-            margin-bottom: 14px;
-        }
-
-        .section-heading p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
+        .mini-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .about-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-            gap: 24px;
-            align-items: start;
+            grid-template-columns: 1.15fr 0.85fr;
         }
 
-        .story-card {
-            padding: 34px;
+        .detail-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .story-card h3,
-        .service-card h3,
-        .event-card h3,
-        .sermon-card h3,
-        .contact-card h3,
-        .value-card h3 {
-            color: var(--heading);
-            font-size: 1.35rem;
-            margin: 18px 0 12px;
-        }
-
-        .story-card p,
-        .value-card p,
-        .service-card p,
-        .event-card p,
-        .sermon-card p,
-        .contact-card p {
-            color: var(--text-muted);
-        }
-
-        .story-card p + p {
-            margin-top: 14px;
-        }
-
-        .story-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 22px;
-        }
-
-        .about-cards {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px;
-        }
-
-        .value-card,
-        .service-card,
-        .event-card,
-        .sermon-card,
-        .contact-card {
-            padding: 30px;
-        }
-
-        .value-card {
-            min-height: 100%;
-        }
-
-        .alt-section {
-            position: relative;
-        }
-
-        .alt-section::before {
-            content: '';
-            position: absolute;
-            inset: 22px 0 22px;
-            background: rgba(255, 255, 255, 0.28);
-            z-index: 0;
-        }
-
-        body.dark-mode .alt-section::before {
-            background: rgba(10, 16, 32, 0.45);
-        }
-
-        .alt-section .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .services-grid,
-        .events-grid,
-        .sermons-grid,
         .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .service-card,
-        .event-card,
-        .sermon-card,
-        .contact-card {
-            position: relative;
-            overflow: hidden;
+        .story-brief,
+        .detail-card,
+        .contact-card,
+        .event-row,
+        .player-card,
+        .sermon-list-card,
+        .footer-shell,
+        .radio-band,
+        .mini-card,
+        .hero-copy,
+        .hero-aside {
+            background: var(--surface);
         }
 
-        .service-card::after,
-        .event-card::after,
-        .sermon-card::after,
-        .contact-card::after {
-            content: '';
-            position: absolute;
-            inset: auto -20px -40px auto;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(79, 111, 255, 0.08), transparent 70%);
-            pointer-events: none;
+        .story-brief,
+        .detail-card,
+        .contact-card,
+        .event-row,
+        .player-card,
+        .sermon-list-card,
+        .footer-shell,
+        .radio-band,
+        .mini-card,
+        .hero-copy,
+        .hero-aside {
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
         }
 
-        .service-list {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 18px;
+        .story-brief p + p {
+            margin-top: 10px;
         }
 
-        .link-inline {
+        .icon-chip {
+            width: 44px;
+            height: 44px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 22px;
+            justify-content: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(83, 109, 254, 0.18), rgba(255, 124, 107, 0.18));
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .events-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .event-row {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 18px 20px;
+        }
+
+        .event-date-badge {
+            min-width: 72px;
+            padding: 12px 10px;
+            border-radius: 18px;
+            background: var(--surface-soft);
+            text-align: center;
+        }
+
+        .event-date-badge strong {
+            display: block;
+            color: var(--heading);
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .event-date-badge span {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .event-side-label {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .sermon-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 16px;
+            padding: 0;
+            background: none;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .player-card {
+            display: grid;
+            gap: 14px;
+            align-content: start;
+        }
+
+        .player-kicker,
+        .card-kicker {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .player-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--heading);
+            font-size: clamp(1.7rem, 3vw, 2.35rem);
+            line-height: 1.06;
+        }
+
+        .player-subtitle {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .player-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .player-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 46px;
+            padding: 0 16px;
+            border: 0;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .player-button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .ghost-link {
             color: var(--primary);
             font-weight: 700;
         }
 
-        .card-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
+        .player-card audio {
+            width: 100%;
+            margin-top: 4px;
+            accent-color: var(--primary);
         }
 
-        .status-pill,
-        .special-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 34px;
-            padding: 0 12px;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 700;
-        }
-
-        .status-pill {
-            background: var(--chip-bg);
-            color: var(--chip-text);
-        }
-
-        .special-badge {
-            background: rgba(255, 123, 107, 0.14);
-            color: var(--accent-strong);
-        }
-
-        .event-meta,
-        .sermon-meta {
-            display: flex;
-            flex-wrap: wrap;
+        .sermon-list-card {
+            display: grid;
             gap: 10px;
-            margin: 16px 0;
+            align-content: start;
         }
 
-        .event-description {
+        .sermon-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .sermon-item {
+            width: 100%;
+            text-align: left;
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            background: var(--surface-strong);
+            color: inherit;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .sermon-item:hover,
+        .sermon-item:focus-visible,
+        .sermon-item.active {
+            transform: translateY(-1px);
+            border-color: rgba(83, 109, 254, 0.35);
+            background: var(--primary-soft);
+            outline: none;
+        }
+
+        .sermon-item-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .sermon-item h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .sermon-item p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
             margin-top: 4px;
         }
 
-        .sermon-card h4 {
-            color: var(--text);
-            font-size: 1rem;
-            margin-top: -2px;
-            font-weight: 600;
-        }
-
-        audio {
-            width: 100%;
-            margin-top: 18px;
-            accent-color: var(--primary);
+        .sermon-play-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: var(--surface-soft);
+            color: var(--primary);
+            flex-shrink: 0;
         }
 
         .radio-band {
             display: grid;
             grid-template-columns: minmax(0, 1fr) auto;
-            gap: 22px;
+            gap: 16px;
             align-items: center;
-            padding: 36px;
-            background:
-                linear-gradient(135deg, rgba(79, 111, 255, 0.16), rgba(255, 123, 107, 0.16)),
-                var(--surface);
+            background: linear-gradient(135deg, rgba(83, 109, 254, 0.16), rgba(255, 124, 107, 0.16)), var(--surface);
         }
 
-        .radio-band h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--heading);
-            font-size: clamp(2rem, 4vw, 3rem);
-            line-height: 1.04;
-            margin: 14px 0;
+        .radio-copy h2 {
+            font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+            margin: 10px 0 10px;
         }
 
-        .radio-band p {
-            color: var(--text-muted);
-            max-width: 700px;
+        .contact-line {
+            display: block;
+            font-size: 0.96rem;
         }
 
-        .radio-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 22px;
-        }
-
-        .contact-card a {
+        .contact-link {
             color: var(--primary);
             font-weight: 700;
         }
 
         .footer {
-            padding: 26px 0 32px;
+            padding: 24px 0 30px;
         }
 
         .footer-shell {
-            padding: 32px;
-            background: rgba(10, 16, 32, 0.96);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #dbe5ff;
-        }
-
-        .footer-content {
+            padding: 22px 24px;
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
             justify-content: space-between;
-            gap: 24px;
+            gap: 12px 20px;
         }
 
-        .footer-brand h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #ffffff;
+        .footer-brand strong {
+            color: var(--heading);
         }
 
-        .footer-brand p {
-            max-width: 420px;
-            color: rgba(219, 229, 255, 0.75);
-        }
-
-        .footer-links ul {
+        .footer-links,
+        .social-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            list-style: none;
+            gap: 8px;
         }
 
         .footer-links a,
@@ -803,44 +731,23 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 44px;
-            padding: 0 16px;
+            min-height: 40px;
+            padding: 0 14px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #ffffff;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            background: var(--surface-strong);
+            border: 1px solid var(--border);
         }
 
         .social-links a {
-            min-width: 44px;
+            min-width: 40px;
             padding: 0;
-            border-radius: 16px;
-        }
-
-        .footer-links a:hover,
-        .social-links a:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .footer-note {
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            color: rgba(219, 229, 255, 0.72);
-            font-size: 0.94rem;
+            border-radius: 14px;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(18px);
-            transition: opacity 0.55s ease, transform 0.55s ease;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .reveal-visible {
@@ -848,32 +755,23 @@
             transform: translateY(0);
         }
 
-        @media (max-width: 1080px) {
+        @media (max-width: 900px) {
             .hero-grid,
             .about-grid,
-            .radio-band {
+            .sermon-shell,
+            .radio-band,
+            .detail-grid,
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
 
-            .preview-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 860px) {
-            main {
-                padding-top: 108px;
-            }
-
-            .header-container {
-                padding: 12px 14px;
-                border-radius: 28px;
-                position: relative;
+            .mini-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
             nav {
                 position: absolute;
-                top: calc(100% + 12px);
+                top: calc(100% + 10px);
                 left: 0;
                 right: 0;
                 margin-left: 0;
@@ -881,11 +779,11 @@
                 border: 1px solid var(--border);
                 border-radius: 24px;
                 box-shadow: var(--shadow);
-                padding: 14px;
+                padding: 12px;
                 opacity: 0;
                 pointer-events: none;
                 transform: translateY(-10px);
-                transition: opacity 0.25s ease, transform 0.25s ease;
+                transition: opacity 0.2s ease, transform 0.2s ease;
             }
 
             nav.active {
@@ -907,66 +805,71 @@
                 display: inline-flex;
             }
 
-            .preview-grid,
-            .about-cards {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+            .header-shell {
+                position: relative;
+                border-radius: 26px;
             }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 720px) {
             .container {
-                width: min(100% - 24px, 1180px);
+                width: min(100% - 22px, 1080px);
+            }
+
+            main {
+                padding-top: 96px;
             }
 
             .hero-copy,
-            .hero-panel,
-            .story-card,
-            .value-card,
-            .service-card,
-            .event-card,
-            .sermon-card,
-            .contact-card,
+            .hero-aside,
+            .story-brief,
+            .mini-card,
+            .event-row,
+            .player-card,
+            .sermon-list-card,
             .radio-band,
-            .footer-shell {
-                padding: 24px;
+            .contact-card,
+            .footer-shell,
+            .detail-card {
+                padding: 20px;
             }
 
-            .hero-copy h1 {
-                max-width: none;
-                font-size: clamp(2.5rem, 11vw, 3.7rem);
-            }
-
-            .preview-grid,
-            .about-cards,
-            .services-grid,
-            .events-grid,
-            .sermons-grid,
+            .mini-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
             }
 
-            .floating-actions {
-                right: 14px;
-                bottom: 14px;
+            .event-row {
+                grid-template-columns: 1fr;
+                align-items: start;
             }
 
-            .theme-toggle,
-            .radio-float {
-                width: 52px;
-                height: 52px;
-                border-radius: 18px;
+            .event-side-label {
+                justify-self: start;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .hero-copy h1 {
+                max-width: none;
+                font-size: clamp(2.35rem, 10vw, 3.4rem);
             }
 
             .hero-actions,
-            .footer-links ul,
+            .quick-tags,
+            .story-tags,
+            .radio-tags,
+            .footer-shell,
+            .footer-links,
             .social-links {
                 flex-direction: column;
                 align-items: stretch;
             }
 
-            .footer-links a,
-            .social-links a {
-                justify-content: center;
+            .footer-shell {
+                align-items: stretch;
             }
         }
 
@@ -975,9 +878,7 @@
                 scroll-behavior: auto;
             }
 
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
@@ -994,21 +895,11 @@
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <div class="floating-actions">
-        <a class="radio-float" href="http://tcradios.njcbelgium.be" target="_blank" rel="noreferrer" aria-label="Listen to TC Radios" title="Listen to TC Radios">
-            <i class="fas fa-broadcast-tower"></i>
-        </a>
-        <button class="theme-toggle" type="button" aria-label="Toggle theme" aria-pressed="false">
-            <i class="fas fa-moon" aria-hidden="true"></i>
-            <span class="sr-only">Toggle theme</span>
-        </button>
-    </div>
-
     <header>
         <div class="container">
-            <div class="header-container">
+            <div class="header-shell">
                 <a class="brand" href="#home">
-                    <span class="logo-mark">
+                    <span class="brand-mark">
                         <img src="https://i.ibb.co/rRtz0tGT/Logo.png" alt="New Jerusalem Church Belgium logo">
                     </span>
                     <span class="brand-copy">
@@ -1020,11 +911,11 @@
                 <nav id="site-nav" aria-label="Primary navigation">
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Life</a></li>
                         <li><a href="#events">Events</a></li>
                         <li><a href="#sermons">Sermons</a></li>
-                        <li><a href="#radio">TC Radios</a></li>
+                        <li><a href="#radio">Radio</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
@@ -1032,71 +923,52 @@
                 <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">
                     <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
+                <button id="theme-toggle" class="theme-toggle-control" type="button" aria-label="Toggle theme" aria-pressed="false">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
             </div>
         </div>
     </header>
 
     <main id="main-content">
-        <section id="home" class="hero">
+        <section id="home" class="section">
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-copy surface-card reveal">
                         <span class="eyebrow">Faith. Fellowship. Antwerpen.</span>
-                        <h1>Welcome to New Jerusalem Church Belgium</h1>
-                        <p>A place to worship, belong, and grow in Christ - with weekly services, prayer gatherings, recent sermons, and 24/7 access to TC Radios.</p>
+                        <h1>Short, warm, and welcoming.</h1>
+                        <p>Join us for Sunday worship, prayer gatherings, recent sermons, and round-the-clock radio - all in one simple place.</p>
                         <div class="hero-actions">
-                            <a href="#about" class="btn btn-primary">Discover our community</a>
+                            <a href="#sermons" class="btn btn-primary">Listen to sermons</a>
                             <a href="#contact" class="btn btn-secondary">Plan a visit</a>
                         </div>
-                        <div class="hero-highlights">
-                            <span><i class="far fa-calendar"></i>Sunday worship at 14:30</span>
-                            <span><i class="fas fa-hands-praying"></i>Prayer on 2nd and 4th Saturdays</span>
-                            <span><i class="fas fa-radio"></i>Listen live on TC Radios</span>
+                        <div class="quick-tags">
+                            <span><i class="far fa-calendar"></i>Sunday 14:30</span>
+                            <span><i class="fas fa-hands-praying"></i>2nd & 4th Saturday 17:00</span>
+                            <span><i class="fas fa-broadcast-tower"></i>TC Radios live</span>
                         </div>
                     </div>
 
-                    <div class="hero-side">
-                        <div class="hero-panel surface-card reveal">
-                            <p class="panel-kicker">This week at NJC Belgium</p>
-                            <h2>Gather with us in worship, prayer, and hope.</h2>
-                            <div class="schedule-list">
-                                <div class="schedule-item">
-                                    <i class="fas fa-church"></i>
-                                    <div>
-                                        <strong>Sunday Worship</strong>
-                                        <span>Every Sunday at 14:30 in Antwerp with worship, prayer, and the Word.</span>
-                                    </div>
-                                </div>
-                                <div class="schedule-item">
-                                    <i class="fas fa-hands-praying"></i>
-                                    <div>
-                                        <strong>Prayer Meetings</strong>
-                                        <span>Join us on the 2nd and 4th Saturdays at 17:00 for focused prayer.</span>
-                                    </div>
-                                </div>
-                                <div class="schedule-item">
-                                    <i class="fas fa-broadcast-tower"></i>
-                                    <div>
-                                        <strong>Always Connected</strong>
-                                        <span>Stay encouraged throughout the week with online sermons and live radio.</span>
-                                    </div>
-                                </div>
+                    <div class="hero-stack">
+                        <div class="hero-aside surface-card reveal">
+                            <span class="card-kicker">This week</span>
+                            <h3>Simple ways to stay connected.</h3>
+                            <p class="hero-note">Worship with us in Antwerp, pray with the church, and keep listening through the week.</p>
+                            <div class="mini-meta" style="margin-top:14px;">
+                                <span><i class="fas fa-church"></i>Sunday worship</span>
+                                <span><i class="fas fa-headphones"></i>Online sermons</span>
                             </div>
                         </div>
-
-                        <div class="preview-grid">
-                            <div class="metric-card surface-card reveal">
+                        <div class="mini-grid">
+                            <article class="mini-card reveal">
                                 <strong>1968</strong>
-                                <p>Founded in India with a continuing mission in Belgium.</p>
-                            </div>
-                            <div class="metric-card surface-card reveal">
+                                <p>Founded in India, serving believers in Belgium.</p>
+                            </article>
+                            <article class="mini-card reveal">
                                 <strong>Antwerp</strong>
-                                <p>A welcoming church home for worship, fellowship, and spiritual growth.</p>
-                            </div>
-                            <div class="metric-card surface-card reveal">
-                                <strong>Recent Sermons</strong>
-                                <p>Listen again to encouraging messages anytime from our sermon library.</p>
-                            </div>
+                                <p>A welcoming church home for worship and prayer.</p>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -1106,93 +978,69 @@
         <section id="about" class="section">
             <div class="container">
                 <div class="section-heading reveal">
-                    <span class="eyebrow">About us</span>
-                    <h2>A vibrant church family rooted in worship and service.</h2>
-                    <p>We are a vibrant community of believers dedicated to spreading the love of Christ through worship, service, and fellowship - welcoming everyone seeking spiritual growth and connection.</p>
+                    <div class="section-copy">
+                        <span class="eyebrow">About us</span>
+                        <h2>A church family centered on Christ.</h2>
+                    </div>
+                    <p>We welcome people who are seeking worship, prayer, fellowship, and steady spiritual growth.</p>
                 </div>
 
                 <div class="about-grid">
-                    <article class="story-card surface-card reveal">
-                        <p class="card-kicker">Who we are</p>
-                        <h3>Growing in faith together with open hearts and steady hope.</h3>
-                        <p>Founded in 1968 in India, New Jerusalem Church has served the spiritual needs of the community for decades while maintaining rich traditions and embracing a multicultural congregation in Belgium.</p>
-                        <p>Our church life centers on Christ, prayer, fellowship, and service - creating space for worshippers of all ages to learn, belong, and be strengthened in faith.</p>
-                        <div class="story-tags">
-                            <span><i class="fas fa-users"></i>Multicultural congregation</span>
-                            <span><i class="fas fa-heart"></i>Welcoming community</span>
-                            <span><i class="fas fa-cross"></i>Christ-centered worship</span>
+                    <article class="story-brief reveal">
+                        <span class="card-kicker">Who we are</span>
+                        <h3>Warm faith, rich roots, and an open invitation.</h3>
+                        <p>Founded in 1968 in India, New Jerusalem Church continues to serve the spiritual needs of believers in Belgium while embracing a multicultural congregation.</p>
+                        <p>Our mission is to share the Gospel of Jesus Christ, nurture spiritual growth, and serve people with love and compassion.</p>
+                        <div class="story-tags" style="margin-top:14px;">
+                            <span><i class="fas fa-users"></i>Multicultural</span>
+                            <span><i class="fas fa-cross"></i>Christ-centered</span>
+                            <span><i class="fas fa-heart"></i>Welcoming</span>
                         </div>
                     </article>
-
-                    <div class="about-cards">
-                        <article class="value-card surface-card reveal">
-                            <div class="icon-wrap"><i class="fas fa-church"></i></div>
-                            <h3>Our history</h3>
-                            <p>Founded in 1968 in India, we continue to serve believers in Belgium with faithfulness, continuity, and care.</p>
+                    <div class="detail-grid">
+                        <article class="detail-card reveal">
+                            <span class="icon-chip"><i class="fas fa-book-bible"></i></span>
+                            <h3>Word</h3>
+                            <p>Biblical teaching that strengthens everyday faith.</p>
                         </article>
-                        <article class="value-card surface-card reveal">
-                            <div class="icon-wrap"><i class="fas fa-cross"></i></div>
-                            <h3>Our mission</h3>
-                            <p>To share the transformative Gospel of Jesus Christ, nurture spiritual growth, and serve our community with love and compassion.</p>
+                        <article class="detail-card reveal">
+                            <span class="icon-chip"><i class="fas fa-hands-praying"></i></span>
+                            <h3>Prayer</h3>
+                            <p>Regular prayer meetings for the church and community.</p>
                         </article>
-                        <article class="value-card surface-card reveal">
-                            <div class="icon-wrap"><i class="fas fa-hand-holding-heart"></i></div>
-                            <h3>Community care</h3>
-                            <p>We create space for encouragement, prayer, and fellowship so that no one has to walk alone.</p>
-                        </article>
-                        <article class="value-card surface-card reveal">
-                            <div class="icon-wrap"><i class="fas fa-door-open"></i></div>
-                            <h3>Open invitation</h3>
-                            <p>Whether you are exploring faith or seeking a church family, you are welcome to join and grow with us.</p>
+                        <article class="detail-card reveal">
+                            <span class="icon-chip"><i class="fas fa-hand-holding-heart"></i></span>
+                            <h3>Care</h3>
+                            <p>A community where people can belong and grow together.</p>
                         </article>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="section alt-section">
+        <section id="services" class="section">
             <div class="container">
-                <div class="section-heading reveal">
-                    <span class="eyebrow">Church life</span>
-                    <h2>Simple ways to worship, pray, and stay connected.</h2>
-                    <p>Our weekly rhythm is designed to help you stay rooted in faith - in person and online.</p>
+                <div class="section-heading compact reveal">
+                    <div class="section-copy">
+                        <span class="eyebrow">Church life</span>
+                        <h2>Everything important, at a glance.</h2>
+                    </div>
                 </div>
-
-                <div class="services-grid">
-                    <article class="service-card surface-card reveal">
-                        <div class="icon-wrap"><i class="fas fa-pray"></i></div>
-                        <p class="card-kicker">Weekly gathering</p>
+                <div class="detail-grid">
+                    <article class="detail-card reveal">
+                        <span class="icon-chip"><i class="fas fa-pray"></i></span>
                         <h3>Sunday Worship</h3>
-                        <p>Join us every Sunday at 14:30 for our main worship service featuring inspiring messages, prayer, and uplifting music in a welcoming atmosphere.</p>
-                        <ul class="service-list">
-                            <li><i class="far fa-clock"></i>Every Sunday</li>
-                            <li><i class="fas fa-location-dot"></i>Antwerp</li>
-                        </ul>
-                        <a class="link-inline" href="#events">View upcoming gatherings <i class="fas fa-arrow-right"></i></a>
+                        <p>Every Sunday at 14:30 with worship, prayer, and the Word.</p>
                     </article>
-
-                    <article class="service-card surface-card reveal">
-                        <div class="icon-wrap"><i class="fas fa-hands-praying"></i></div>
-                        <p class="card-kicker">Prayer rhythm</p>
+                    <article class="detail-card reveal">
+                        <span class="icon-chip"><i class="fas fa-calendar-week"></i></span>
                         <h3>Prayer Meetings</h3>
-                        <p>Every 2nd and 4th Saturday at 17:00, we gather for powerful prayer sessions where we intercede for our church, community, and world.</p>
-                        <ul class="service-list">
-                            <li><i class="fas fa-calendar-week"></i>2nd and 4th Saturday</li>
-                            <li><i class="far fa-clock"></i>17:00</li>
-                        </ul>
-                        <a class="link-inline" href="#contact">Get in touch <i class="fas fa-arrow-right"></i></a>
+                        <p>Every 2nd and 4th Saturday at 17:00.</p>
                     </article>
-
-                    <article class="service-card surface-card reveal">
-                        <div class="icon-wrap"><i class="fas fa-broadcast-tower"></i></div>
-                        <p class="card-kicker">Anytime access</p>
+                    <article class="detail-card reveal">
+                        <span class="icon-chip"><i class="fas fa-radio"></i></span>
                         <h3>TC Radios</h3>
-                        <p>Experience uplifting Christian programming, worship music, and biblical teaching through our 24/7 online radio station.</p>
-                        <ul class="service-list">
-                            <li><i class="fas fa-headphones"></i>Listen anywhere</li>
-                            <li><i class="fas fa-signal"></i>24/7 online stream</li>
-                        </ul>
-                        <a class="link-inline" href="#radio">Start listening <i class="fas fa-arrow-right"></i></a>
+                        <p>Listen to worship music and teaching online anytime.</p>
                     </article>
                 </div>
             </div>
@@ -1200,39 +1048,70 @@
 
         <section id="events" class="section">
             <div class="container">
-                <div class="section-heading reveal">
-                    <span class="eyebrow">Upcoming events</span>
-                    <h2>See the next moments to gather, worship, and pray.</h2>
-                    <p>We keep the upcoming schedule easy to browse so you can quickly see what is next.</p>
+                <div class="section-heading compact reveal">
+                    <div class="section-copy">
+                        <span class="eyebrow">Upcoming events</span>
+                        <h2>Next gatherings</h2>
+                    </div>
+                    <p>Easy to scan, so you can see what is next quickly.</p>
                 </div>
-
-                <div class="events-grid" id="events-container">
-                    <article class="event-card surface-card">
-                        <div class="card-head">
-                            <span class="status-pill">Loading</span>
+                <div class="events-list" id="events-container">
+                    <article class="event-row reveal reveal-visible">
+                        <div class="event-date-badge"><strong>--</strong><span>Loading</span></div>
+                        <div>
+                            <h3>Loading upcoming events...</h3>
+                            <p>Please wait while the schedule is prepared.</p>
                         </div>
-                        <h3>Loading upcoming events...</h3>
-                        <p class="event-description">Please wait while we prepare the next worship services and prayer meetings.</p>
+                        <span class="event-side-label">Loading</span>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section id="sermons" class="section alt-section">
+        <section id="sermons" class="section">
             <div class="container">
-                <div class="section-heading reveal">
-                    <span class="eyebrow">Recent sermons</span>
-                    <h2>Listen again to messages that encourage faith and daily living.</h2>
-                    <p>Catch up on recent preaching and keep the Word close throughout the week.</p>
+                <div class="section-heading compact reveal">
+                    <div class="section-copy">
+                        <span class="eyebrow">Recent sermons</span>
+                        <h2>Compact list, one shared player.</h2>
+                    </div>
+                    <p>Pick any message from the list and play it in one clean player.</p>
                 </div>
 
-                <div class="sermons-grid" id="sermons-container">
-                    <article class="sermon-card surface-card">
-                        <div class="card-head">
-                            <span class="status-pill">Loading</span>
+                <div class="sermon-shell">
+                    <article class="player-card reveal">
+                        <span class="player-kicker">Now playing</span>
+                        <h3 class="player-title" id="player-title">Loading sermons...</h3>
+                        <p class="player-subtitle" id="player-subtitle">Please wait while recent recordings load.</p>
+                        <div class="sermon-meta" id="player-meta">
+                            <span><i class="far fa-calendar"></i>Recent message</span>
                         </div>
-                        <h3>Loading sermons...</h3>
-                        <p>Recent sermon recordings will appear here shortly.</p>
+                        <audio id="sermon-player" controls preload="metadata">
+                            <source id="sermon-player-source" src="">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="player-actions">
+                            <button class="player-button" id="player-play-button" type="button">
+                                <i class="fas fa-play"></i>
+                                Play sermon
+                            </button>
+                            <a class="ghost-link" id="player-download-link" href="#" target="_blank" rel="noreferrer">Open audio source</a>
+                        </div>
+                    </article>
+
+                    <article class="sermon-list-card reveal">
+                        <span class="card-kicker">Sermon list</span>
+                        <div class="sermon-list" id="sermons-container">
+                            <button class="sermon-item active" type="button">
+                                <span class="sermon-item-head">
+                                    <span>
+                                        <h3>Loading sermons...</h3>
+                                        <p>Please wait while recordings load.</p>
+                                    </span>
+                                    <span class="sermon-play-pill"><i class="fas fa-play"></i></span>
+                                </span>
+                            </button>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -1240,14 +1119,13 @@
 
         <section id="radio" class="section">
             <div class="container">
-                <div class="radio-band surface-card reveal">
-                    <div>
-                        <span class="eyebrow">24/7 online radio</span>
-                        <h2>Listen to TC Radios wherever you are.</h2>
-                        <p>Experience uplifting Christian programming, worship music, and biblical teaching through our online station and stay connected throughout the week.</p>
-                        <div class="radio-features">
+                <div class="radio-band reveal">
+                    <div class="radio-copy">
+                        <span class="eyebrow">TC Radios</span>
+                        <h2>Stay connected through the week.</h2>
+                        <p>Listen to uplifting Christian music, biblical teaching, and encouraging programming anytime.</p>
+                        <div class="radio-tags" style="margin-top:14px;">
                             <span><i class="fas fa-circle-play"></i>Instant access</span>
-                            <span><i class="fas fa-music"></i>Worship and teaching</span>
                             <span><i class="fas fa-globe"></i>Available worldwide</span>
                         </div>
                     </div>
@@ -1261,35 +1139,29 @@
 
         <section id="contact" class="section">
             <div class="container">
-                <div class="section-heading reveal">
-                    <span class="eyebrow">Contact us</span>
-                    <h2>We would love to welcome and hear from you.</h2>
-                    <p>Reach out for directions, questions, or simply to learn more before your visit.</p>
+                <div class="section-heading compact reveal">
+                    <div class="section-copy">
+                        <span class="eyebrow">Contact</span>
+                        <h2>Visit or reach out.</h2>
+                    </div>
                 </div>
-
                 <div class="contact-grid">
-                    <article class="contact-card surface-card reveal">
-                        <div class="icon-wrap"><i class="fas fa-map-marker-alt"></i></div>
+                    <article class="contact-card reveal">
+                        <span class="icon-chip"><i class="fas fa-map-marker-alt"></i></span>
                         <h3>Address</h3>
-                        <p>New Jerusalem Church<br>Ten Eekhovelei 292,<br>2100 Antwerpen, Belgium</p>
+                        <span class="contact-line">New Jerusalem Church</span>
+                        <span class="contact-line">Ten Eekhovelei 292</span>
+                        <span class="contact-line">2100 Antwerpen, Belgium</span>
                     </article>
-
-                    <article class="contact-card surface-card reveal">
-                        <div class="icon-wrap"><i class="fas fa-phone"></i></div>
+                    <article class="contact-card reveal">
+                        <span class="icon-chip"><i class="fas fa-phone"></i></span>
                         <h3>Telephone</h3>
-                        <p><a href="tel:+32483116484">+32 483 11 64 84</a></p>
+                        <a class="contact-link" href="tel:+32483116484">+32 483 11 64 84</a>
                     </article>
-
-                    <article class="contact-card surface-card reveal">
-                        <div class="icon-wrap"><i class="fas fa-envelope"></i></div>
+                    <article class="contact-card reveal">
+                        <span class="icon-chip"><i class="fas fa-envelope"></i></span>
                         <h3>Email</h3>
-                        <p><a href="mailto:simsonpeter@gmail.com">simsonpeter@gmail.com</a></p>
-                    </article>
-
-                    <article class="contact-card surface-card reveal">
-                        <div class="icon-wrap"><i class="fas fa-door-open"></i></div>
-                        <h3>Visit us</h3>
-                        <p>Everyone is welcome. Join us for Sunday worship at 14:30 or prayer meetings on the 2nd and 4th Saturdays at 17:00.</p>
+                        <a class="contact-link" href="mailto:simsonpeter@gmail.com">simsonpeter@gmail.com</a>
                     </article>
                 </div>
             </div>
@@ -1298,29 +1170,22 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-shell surface-card">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3>New Jerusalem Church Belgium</h3>
-                        <p>A place of worship, fellowship, and spiritual growth in the heart of Antwerp.</p>
-                    </div>
-
-                    <div class="footer-links">
-                        <ul>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#events">Events</a></li>
-                            <li><a href="#sermons">Sermons</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="social-links" aria-label="Social links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
+            <div class="footer-shell reveal reveal-visible">
+                <div class="footer-brand">
+                    <strong>New Jerusalem Church Belgium</strong>
+                    <p class="footer-note">A place of worship, fellowship, and spiritual growth in Antwerp.</p>
                 </div>
-                <p class="footer-note">&copy; <span id="footer-year">2026</span> New Jerusalem Church Belgium. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#events">Events</a>
+                    <a href="#sermons">Sermons</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="social-links" aria-label="Social links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
     </footer>
@@ -1328,16 +1193,25 @@
     <script>
         const body = document.body;
         const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
         const menuToggle = document.querySelector('.menu-toggle');
         const menuIcon = menuToggle.querySelector('i');
-        const nav = document.querySelector('nav');
-        const themeToggle = document.querySelector('.theme-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = themeToggle.querySelector('i');
         const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+        const player = document.getElementById('sermon-player');
+        const playerSource = document.getElementById('sermon-player-source');
+        const playerTitle = document.getElementById('player-title');
+        const playerSubtitle = document.getElementById('player-subtitle');
+        const playerMeta = document.getElementById('player-meta');
+        const playerButton = document.getElementById('player-play-button');
+        const playerDownloadLink = document.getElementById('player-download-link');
+        let sermonState = [];
+        let activeSermonIndex = 0;
 
         function setMenuState(isOpen) {
             nav.classList.toggle('active', isOpen);
-            body.classList.toggle('nav-open', isOpen && window.innerWidth <= 860);
+            body.classList.toggle('nav-open', isOpen && window.innerWidth <= 900);
             menuToggle.setAttribute('aria-expanded', String(isOpen));
             menuIcon.classList.toggle('fa-bars', !isOpen);
             menuIcon.classList.toggle('fa-xmark', isOpen);
@@ -1348,7 +1222,7 @@
         });
 
         document.addEventListener('click', (event) => {
-            if (window.innerWidth > 860 || !nav.classList.contains('active')) {
+            if (window.innerWidth > 900 || !nav.classList.contains('active')) {
                 return;
             }
 
@@ -1364,7 +1238,7 @@
         });
 
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 860) {
+            if (window.innerWidth > 900) {
                 body.classList.remove('nav-open');
                 setMenuState(false);
             }
@@ -1376,13 +1250,9 @@
                 return;
             }
 
-            const headerOffset = header.offsetHeight + 28;
+            const headerOffset = header.offsetHeight + 24;
             const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset;
-
-            window.scrollTo({
-                top: targetTop,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: targetTop, behavior: 'smooth' });
         }
 
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -1412,8 +1282,7 @@
             themeIcon.classList.toggle('fa-sun', isDark);
         }
 
-        const storedTheme = localStorage.getItem('theme');
-        applyTheme(storedTheme === 'dark' ? 'dark' : 'light');
+        applyTheme(localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
 
         themeToggle.addEventListener('click', () => {
             const nextTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
@@ -1428,31 +1297,25 @@
                 return;
             }
 
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries, currentObserver) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('reveal-visible');
-                        observer.unobserve(entry.target);
+                        currentObserver.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.18,
-                rootMargin: '0px 0px -40px 0px'
-            });
+            }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
 
-            revealElements.forEach((element) => revealObserver.observe(element));
+            revealElements.forEach((element) => observer.observe(element));
         }
 
         function observeSections() {
-            const sections = navLinks
-                .map((link) => document.querySelector(link.getAttribute('href')))
-                .filter(Boolean);
-
+            const sections = navLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
             if (!('IntersectionObserver' in window)) {
                 return;
             }
 
-            const sectionObserver = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (!entry.isIntersecting) {
                         return;
@@ -1462,12 +1325,9 @@
                         link.classList.toggle('is-current', link.getAttribute('href') === `#${entry.target.id}`);
                     });
                 });
-            }, {
-                threshold: 0.35,
-                rootMargin: '-35% 0px -45% 0px'
-            });
+            }, { threshold: 0.35, rootMargin: '-35% 0px -45% 0px' });
 
-            sections.forEach((section) => sectionObserver.observe(section));
+            sections.forEach((section) => observer.observe(section));
         }
 
         function escapeHtml(value) {
@@ -1479,29 +1339,6 @@
                 .replace(/'/g, '&#39;');
         }
 
-        function formatDisplayDate(date) {
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
-        }
-
-        function formatSermonDate(dateString) {
-            if (!dateString) {
-                return 'Recent message';
-            }
-
-            const parsed = new Date(`${dateString}T12:00:00`);
-            if (Number.isNaN(parsed.getTime())) {
-                return escapeHtml(dateString);
-            }
-
-            return parsed.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            });
-        }
-
         function getBelgianDate() {
             const now = new Date();
             return new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Brussels' }));
@@ -1510,14 +1347,12 @@
         function getNthDayOfMonth(year, month, dayOfWeek, nth) {
             const date = new Date(year, month, 1);
             const matches = [];
-
             while (date.getMonth() === month) {
                 if (date.getDay() === dayOfWeek) {
                     matches.push(new Date(date));
                 }
                 date.setDate(date.getDate() + 1);
             }
-
             return matches[nth - 1] ? new Date(matches[nth - 1]) : null;
         }
 
@@ -1532,30 +1367,29 @@
             const currentYear = fromDate.getFullYear();
             const upcomingMeetings = [];
 
-            const addPrayerMeeting = (date) => {
+            const addMeeting = (date) => {
                 if (!date) {
                     return;
                 }
-
                 const eventDate = setEventTime(date, 17, 0);
                 if (eventDate >= fromDate) {
                     upcomingMeetings.push({
                         title: 'Prayer Meeting',
                         date: eventDate,
                         time: '5:00 PM',
-                        description: 'Our prayer gathering for the church and community.'
+                        description: 'Prayer gathering for the church and community.'
                     });
                 }
             };
 
-            addPrayerMeeting(getNthDayOfMonth(currentYear, currentMonth, 6, 2));
-            addPrayerMeeting(getNthDayOfMonth(currentYear, currentMonth, 6, 4));
+            addMeeting(getNthDayOfMonth(currentYear, currentMonth, 6, 2));
+            addMeeting(getNthDayOfMonth(currentYear, currentMonth, 6, 4));
 
             if (upcomingMeetings.length < 2) {
                 const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
                 const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
-                addPrayerMeeting(getNthDayOfMonth(nextYear, nextMonth, 6, 2));
-                addPrayerMeeting(getNthDayOfMonth(nextYear, nextMonth, 6, 4));
+                addMeeting(getNthDayOfMonth(nextYear, nextMonth, 6, 2));
+                addMeeting(getNthDayOfMonth(nextYear, nextMonth, 6, 4));
             }
 
             return upcomingMeetings.slice(0, 2);
@@ -1565,74 +1399,87 @@
             const date = new Date(fromDate);
             date.setHours(14, 30, 0, 0);
             date.setDate(date.getDate() + ((7 - date.getDay()) % 7));
-
             if (date < fromDate) {
                 date.setDate(date.getDate() + 7);
             }
-
             return date;
+        }
+
+        function formatDisplayDate(date) {
+            return date.toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        function getDayNumber(date) {
+            return date.toLocaleDateString('en-US', { day: '2-digit' });
+        }
+
+        function getMonthShort(date) {
+            return date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+        }
+
+        function formatSermonDate(dateString) {
+            if (!dateString) {
+                return 'Recent message';
+            }
+            const parsed = new Date(`${dateString}T12:00:00`);
+            if (Number.isNaN(parsed.getTime())) {
+                return escapeHtml(dateString);
+            }
+            return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
         function displayEvents(events) {
             const eventsContainer = document.getElementById('events-container');
+            const fallbackEvents = [
+                {
+                    title: 'Sunday Worship Service',
+                    date: new Date(),
+                    time: '2:30 PM',
+                    description: 'Join us for worship and fellowship.',
+                    label: 'Weekly'
+                },
+                {
+                    title: 'Prayer Meeting',
+                    date: new Date(),
+                    time: '5:00 PM',
+                    description: 'Prayer gathering for the church and community.',
+                    label: 'Prayer'
+                }
+            ];
 
-            if (!events.length) {
-                eventsContainer.innerHTML = `
-                    <article class="event-card surface-card reveal reveal-visible">
-                        <div class="card-head">
-                            <span class="status-pill">Weekly</span>
-                        </div>
-                        <h3>Sunday Worship Service</h3>
-                        <div class="event-meta">
-                            <span><i class="far fa-calendar"></i>Every Sunday</span>
-                            <span><i class="far fa-clock"></i>2:30 PM</span>
-                        </div>
-                        <p class="event-description">Join us for our regular Sunday worship service.</p>
-                    </article>
-                    <article class="event-card surface-card reveal reveal-visible">
-                        <div class="card-head">
-                            <span class="status-pill">Prayer</span>
-                        </div>
-                        <h3>Prayer Meeting</h3>
-                        <div class="event-meta">
-                            <span><i class="far fa-calendar"></i>2nd and 4th Saturdays</span>
-                            <span><i class="far fa-clock"></i>5:00 PM</span>
-                        </div>
-                        <p class="event-description">Our bi-monthly prayer gatherings.</p>
-                    </article>
-                `;
-                return;
-            }
-
-            eventsContainer.innerHTML = events.map((event, index) => `
-                <article class="event-card surface-card reveal reveal-visible">
-                    <div class="card-head">
-                        <span class="status-pill">${event.isSpecial ? 'Special event' : (index === 0 ? 'Next up' : 'Coming soon')}</span>
-                        ${event.isSpecial ? '<span class="special-badge">Special</span>' : ''}
+            const items = events.length ? events : fallbackEvents;
+            eventsContainer.innerHTML = items.map((event, index) => `
+                <article class="event-row reveal reveal-visible">
+                    <div class="event-date-badge">
+                        <strong>${getDayNumber(event.date)}</strong>
+                        <span>${getMonthShort(event.date)}</span>
                     </div>
-                    <h3>${escapeHtml(event.title)}</h3>
-                    <div class="event-meta">
-                        <span><i class="far fa-calendar"></i>${formatDisplayDate(event.date)}</span>
-                        <span><i class="far fa-clock"></i>${escapeHtml(event.time)}</span>
+                    <div>
+                        <h3>${escapeHtml(event.title)}</h3>
+                        <div class="event-meta" style="margin:8px 0;">
+                            <span><i class="far fa-calendar"></i>${formatDisplayDate(event.date)}</span>
+                            <span><i class="far fa-clock"></i>${escapeHtml(event.time)}</span>
+                        </div>
+                        <p>${escapeHtml(event.description)}</p>
                     </div>
-                    <p class="event-description">${escapeHtml(event.description)}</p>
+                    <span class="event-side-label">${event.isSpecial ? 'Special' : (index === 0 ? 'Next up' : 'Coming soon')}</span>
                 </article>
             `).join('');
         }
 
         async function fetchSermons() {
-            const sources = [
-                './sermons.json',
-                'https://raw.githubusercontent.com/simsonpeter/njcbelgium/main/sermons.json'
-            ];
-
+            const sources = ['./sermons.json', 'https://raw.githubusercontent.com/simsonpeter/njcbelgium/main/sermons.json'];
             for (const source of sources) {
                 try {
                     const response = await fetch(source, { cache: 'no-store' });
                     if (!response.ok) {
                         continue;
                     }
-
                     const data = await response.json();
                     if (Array.isArray(data)) {
                         return data;
@@ -1641,49 +1488,95 @@
                     console.warn('Unable to load sermons from', source, error);
                 }
             }
-
             throw new Error('Failed to load sermons from available sources.');
+        }
+
+        function setActiveSermon(index, shouldPlay = false) {
+            if (!sermonState.length || !sermonState[index]) {
+                return;
+            }
+
+            activeSermonIndex = index;
+            const sermon = sermonState[index];
+            const title = sermon.title || 'Sermon';
+            const subtitle = sermon.subtitle || 'Listen to the selected message.';
+            const speaker = sermon.speaker ? `<span><i class="fas fa-user"></i>${escapeHtml(sermon.speaker)}</span>` : '';
+
+            playerTitle.textContent = title;
+            playerSubtitle.textContent = subtitle;
+            playerMeta.innerHTML = `
+                <span><i class="far fa-calendar"></i>${formatSermonDate(sermon.date)}</span>
+                ${speaker}
+            `;
+            playerSource.src = sermon.audioUrl || '';
+            player.load();
+            playerDownloadLink.href = sermon.audioUrl || '#';
+            playerDownloadLink.setAttribute('aria-disabled', sermon.audioUrl ? 'false' : 'true');
+
+            document.querySelectorAll('.sermon-item').forEach((item, itemIndex) => {
+                item.classList.toggle('active', itemIndex == index);
+            });
+
+            if (shouldPlay && sermon.audioUrl) {
+                const playPromise = player.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            }
         }
 
         function renderSermons(sermons) {
             const sermonsContainer = document.getElementById('sermons-container');
-
-            if (!Array.isArray(sermons) || sermons.length === 0) {
+            if (!Array.isArray(sermons) || !sermons.length) {
                 sermonsContainer.innerHTML = `
-                    <article class="sermon-card surface-card reveal reveal-visible">
-                        <div class="card-head">
-                            <span class="status-pill">Library</span>
-                        </div>
-                        <h3>No Sermons Available</h3>
-                        <p>Check back later for new sermon recordings.</p>
-                    </article>
+                    <button class="sermon-item active" type="button">
+                        <span class="sermon-item-head">
+                            <span>
+                                <h3>No Sermons Available</h3>
+                                <p>Check back later for new recordings.</p>
+                            </span>
+                            <span class="sermon-play-pill"><i class="fas fa-volume-xmark"></i></span>
+                        </span>
+                    </button>
                 `;
+                playerTitle.textContent = 'No sermons available';
+                playerSubtitle.textContent = 'Please check back later.';
+                playerMeta.innerHTML = '<span><i class="far fa-calendar"></i>Recent message</span>';
+                playerButton.disabled = true;
+                playerDownloadLink.href = '#';
                 return;
             }
 
-            const sortedSermons = [...sermons].sort((first, second) => {
+            sermonState = [...sermons].sort((first, second) => {
                 const firstDate = new Date(`${first.date || '1970-01-01'}T12:00:00`).getTime();
                 const secondDate = new Date(`${second.date || '1970-01-01'}T12:00:00`).getTime();
                 return secondDate - firstDate;
             });
 
-            sermonsContainer.innerHTML = sortedSermons.map((sermon, index) => `
-                <article class="sermon-card surface-card reveal reveal-visible">
-                    <div class="card-head">
-                        <span class="status-pill">${index === 0 ? 'Latest message' : 'Sermon'}</span>
-                    </div>
-                    <h3>${escapeHtml(sermon.title || 'Sermon')}</h3>
-                    ${sermon.subtitle ? `<h4>${escapeHtml(sermon.subtitle)}</h4>` : ''}
-                    <div class="sermon-meta">
-                        <span><i class="far fa-calendar"></i>${formatSermonDate(sermon.date)}</span>
-                        ${sermon.speaker ? `<span><i class="fas fa-user"></i>${escapeHtml(sermon.speaker)}</span>` : ''}
-                    </div>
-                    <audio controls preload="none">
-                        <source src="${escapeHtml(sermon.audioUrl || '')}">
-                        Your browser does not support the audio element.
-                    </audio>
-                </article>
+            sermonsContainer.innerHTML = sermonState.map((sermon, index) => `
+                <button class="sermon-item${index === 0 ? ' active' : ''}" type="button" data-index="${index}">
+                    <span class="sermon-item-head">
+                        <span>
+                            <h3>${escapeHtml(sermon.title || 'Sermon')}</h3>
+                            <p>${escapeHtml(sermon.subtitle || sermon.speaker || 'Tap to listen')}</p>
+                            <span class="mini-meta" style="margin-top:10px;">
+                                <span><i class="far fa-calendar"></i>${formatSermonDate(sermon.date)}</span>
+                                ${sermon.speaker ? `<span><i class="fas fa-user"></i>${escapeHtml(sermon.speaker)}</span>` : ''}
+                            </span>
+                        </span>
+                        <span class="sermon-play-pill"><i class="fas fa-play"></i></span>
+                    </span>
+                </button>
             `).join('');
+
+            sermonsContainer.querySelectorAll('.sermon-item').forEach((button) => {
+                button.addEventListener('click', () => {
+                    setActiveSermon(Number(button.dataset.index), true);
+                });
+            });
+
+            playerButton.disabled = false;
+            setActiveSermon(0, false);
         }
 
         async function loadSermons() {
@@ -1692,32 +1585,33 @@
                 renderSermons(sermons);
             } catch (error) {
                 console.error('Error loading sermons:', error);
-                renderSermons([
-                    {
-                        title: "Lord's Supper",
-                        subtitle: 'Karatharin Panthi',
-                        speaker: 'Pastor Simson',
-                        audioUrl: 'https://archive.org/download/aud-20220912-wa-0004/AUD-20250406-WA0003.m4a',
-                        date: '2025-04-06'
-                    }
-                ]);
+                renderSermons([{
+                    title: "Lord's Supper",
+                    subtitle: 'Karatharin Panthi',
+                    speaker: 'Pastor Simson',
+                    audioUrl: 'https://archive.org/download/aud-20220912-wa-0004/AUD-20250406-WA0003.m4a',
+                    date: '2025-04-06'
+                }]);
             }
         }
 
-        function initializePage() {
-            document.getElementById('footer-year').textContent = String(new Date().getFullYear());
+        playerButton.addEventListener('click', () => {
+            if (!sermonState.length) {
+                return;
+            }
+            setActiveSermon(activeSermonIndex, true);
+        });
 
+        function initializePage() {
             const belgianDate = getBelgianDate();
             const sundayService = {
                 title: 'Sunday Worship Service',
                 date: getNextSunday(belgianDate),
                 time: '2:30 PM',
-                description: 'Join us for our weekly worship service with inspiring messages and fellowship.'
+                description: 'Weekly worship service with inspiring messages and fellowship.'
             };
-
             const prayerMeetings = getNextPrayerMeetings(belgianDate);
             const allEvents = [sundayService, ...prayerMeetings].sort((a, b) => new Date(a.date) - new Date(b.date));
-
             displayEvents(allEvents.slice(0, 4));
             loadSermons();
             observeRevealElements();
