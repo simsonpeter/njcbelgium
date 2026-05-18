@@ -632,9 +632,62 @@
             align-content: start;
         }
 
+        .sermon-picker-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 16px 18px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--surface-strong);
+            color: inherit;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .sermon-picker-toggle strong {
+            display: block;
+            color: var(--heading);
+            font-size: 1rem;
+            margin-top: 4px;
+        }
+
+        .sermon-picker-icon {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: var(--surface-soft);
+            color: var(--primary);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .sermon-list-card.is-open .sermon-picker-icon {
+            transform: rotate(180deg);
+        }
+
+        .sermon-picker-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease, margin-top 0.25s ease;
+        }
+
+        .sermon-list-card.is-open .sermon-picker-panel {
+            max-height: 460px;
+            margin-top: 2px;
+        }
+
         .sermon-list {
             display: grid;
             gap: 10px;
+            max-height: 380px;
+            overflow: auto;
+            padding-right: 4px;
         }
 
         .sermon-item {
@@ -846,6 +899,10 @@
             .mini-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .sermon-list-card {
+                display: none;
             }
 
             .event-row {
@@ -1110,16 +1167,25 @@
 
                     <article class="sermon-list-card reveal">
                         <span class="card-kicker">Sermon list</span>
-                        <div class="sermon-list" id="sermons-container">
-                            <button class="sermon-item active" type="button">
-                                <span class="sermon-item-head">
-                                    <span>
-                                        <h3>Loading sermons...</h3>
-                                        <p>Please wait while recordings load.</p>
+                        <button class="sermon-picker-toggle" id="sermon-picker-toggle" type="button" aria-expanded="false" aria-controls="sermon-picker-panel">
+                            <span>
+                                <span class="card-kicker">Choose sermon</span>
+                                <strong id="sermon-picker-label">Recent sermon</strong>
+                            </span>
+                            <span class="sermon-picker-icon"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="sermon-picker-panel" id="sermon-picker-panel">
+                            <div class="sermon-list" id="sermons-container">
+                                <button class="sermon-item active" type="button">
+                                    <span class="sermon-item-head">
+                                        <span>
+                                            <h3>Loading sermons...</h3>
+                                            <p>Please wait while recordings load.</p>
+                                        </span>
+                                        <span class="sermon-play-pill"><i class="fas fa-play"></i></span>
                                     </span>
-                                    <span class="sermon-play-pill"><i class="fas fa-play"></i></span>
-                                </span>
-                            </button>
+                                </button>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -1215,8 +1281,21 @@
         const playerMeta = document.getElementById('player-meta');
         const playerButton = document.getElementById('player-play-button');
         const playerDownloadLink = document.getElementById('player-download-link');
+        const sermonPickerCard = document.querySelector('.sermon-list-card');
+        const sermonPickerToggle = document.getElementById('sermon-picker-toggle');
+        const sermonPickerLabel = document.getElementById('sermon-picker-label');
         let sermonState = [];
         let activeSermonIndex = 0;
+
+        function setSermonPickerState(isOpen) {
+            if (!sermonPickerCard || !sermonPickerToggle) {
+                return;
+            }
+
+            const shouldOpen = isOpen && window.innerWidth > 720;
+            sermonPickerCard.classList.toggle('is-open', shouldOpen);
+            sermonPickerToggle.setAttribute('aria-expanded', String(shouldOpen));
+        }
 
         function setMenuState(isOpen) {
             nav.classList.toggle('active', isOpen);
@@ -1250,6 +1329,26 @@
             if (window.innerWidth > 900) {
                 body.classList.remove('nav-open');
                 setMenuState(false);
+            }
+
+            if (window.innerWidth <= 720) {
+                setSermonPickerState(false);
+            }
+        });
+
+        if (sermonPickerToggle) {
+            sermonPickerToggle.addEventListener('click', () => {
+                setSermonPickerState(!sermonPickerCard.classList.contains('is-open'));
+            });
+        }
+
+        document.addEventListener('click', (event) => {
+            if (!sermonPickerCard || window.innerWidth <= 720) {
+                return;
+            }
+
+            if (sermonPickerCard.classList.contains('is-open') && !sermonPickerCard.contains(event.target)) {
+                setSermonPickerState(false);
             }
         });
 
@@ -1521,10 +1620,15 @@
             player.load();
             playerDownloadLink.href = sermon.audioUrl || '#';
             playerDownloadLink.setAttribute('aria-disabled', sermon.audioUrl ? 'false' : 'true');
+            if (sermonPickerLabel) {
+                sermonPickerLabel.textContent = title;
+            }
 
             document.querySelectorAll('.sermon-item').forEach((item, itemIndex) => {
                 item.classList.toggle('active', itemIndex == index);
             });
+
+            setSermonPickerState(false);
 
             if (shouldPlay && sermon.audioUrl) {
                 const playPromise = player.play();
@@ -1553,6 +1657,9 @@
                 playerMeta.innerHTML = '<span><i class="far fa-calendar"></i>Recent message</span>';
                 playerButton.disabled = true;
                 playerDownloadLink.href = '#';
+                if (sermonPickerLabel) {
+                    sermonPickerLabel.textContent = 'No sermons available';
+                }
                 return;
             }
 
