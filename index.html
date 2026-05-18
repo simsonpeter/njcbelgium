@@ -10,33 +10,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f5f7fc;
-            --surface: rgba(255, 255, 255, 0.84);
-            --surface-strong: rgba(255, 255, 255, 0.98);
-            --surface-soft: #eef3ff;
-            --text: #2a3550;
-            --text-muted: #6f7a90;
-            --heading: #101726;
-            --primary: #536dfe;
-            --primary-soft: rgba(83, 109, 254, 0.1);
-            --accent: #ff7c6b;
-            --border: rgba(16, 23, 38, 0.08);
-            --shadow: 0 20px 48px rgba(16, 23, 38, 0.1);
+            --bg: #f6f1e8;
+            --surface: rgba(255, 252, 247, 0.86);
+            --surface-strong: rgba(255, 253, 250, 0.98);
+            --surface-soft: #efe6d8;
+            --text: #4a4f5d;
+            --text-muted: #7d796f;
+            --heading: #172033;
+            --primary: #8d6d3d;
+            --primary-soft: rgba(141, 109, 61, 0.12);
+            --accent: #24334f;
+            --border: rgba(23, 32, 51, 0.09);
+            --shadow: 0 18px 40px rgba(33, 31, 28, 0.09);
         }
 
         body.dark-mode {
-            --bg: #060b15;
-            --surface: rgba(10, 18, 34, 0.82);
-            --surface-strong: rgba(14, 23, 42, 0.98);
-            --surface-soft: #101a31;
-            --text: #edf1ff;
-            --text-muted: #a7b2cb;
-            --heading: #ffffff;
-            --primary: #91a5ff;
-            --primary-soft: rgba(145, 165, 255, 0.14);
-            --accent: #ff9b8f;
-            --border: rgba(167, 178, 203, 0.14);
-            --shadow: 0 26px 56px rgba(0, 0, 0, 0.35);
+            --bg: #0a0d14;
+            --surface: rgba(16, 21, 31, 0.9);
+            --surface-strong: rgba(20, 26, 39, 0.98);
+            --surface-soft: #161d2a;
+            --text: #ebe4d8;
+            --text-muted: #b1aa9b;
+            --heading: #f8f3eb;
+            --primary: #c0a36e;
+            --primary-soft: rgba(192, 163, 110, 0.16);
+            --accent: #8d9db8;
+            --border: rgba(200, 184, 154, 0.14);
+            --shadow: 0 24px 54px rgba(0, 0, 0, 0.34);
         }
 
         * {
@@ -53,12 +53,14 @@
             font-family: 'Inter', sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top left, rgba(83, 109, 254, 0.14), transparent 28%),
-                radial-gradient(circle at top right, rgba(255, 124, 107, 0.14), transparent 26%),
+                radial-gradient(circle at top left, rgba(141, 109, 61, 0.11), transparent 28%),
+                radial-gradient(circle at top right, rgba(36, 51, 79, 0.1), transparent 24%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 40%),
                 var(--bg);
             line-height: 1.6;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
+            letter-spacing: 0.01em;
         }
 
         body.nav-open {
@@ -116,7 +118,7 @@
         .surface-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 24px;
+            border-radius: 26px;
             box-shadow: var(--shadow);
             backdrop-filter: blur(16px);
         }
@@ -135,10 +137,14 @@
             gap: 14px;
             padding: 12px 14px;
             border-radius: 999px;
-            background: var(--surface);
+            background: rgba(255, 253, 249, 0.86);
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
             backdrop-filter: blur(18px);
+        }
+
+        body.dark-mode .header-shell {
+            background: rgba(16, 21, 31, 0.92);
         }
 
         .brand {
@@ -154,8 +160,8 @@
             border-radius: 16px;
             display: grid;
             place-items: center;
-            background: linear-gradient(135deg, rgba(83, 109, 254, 0.18), rgba(255, 124, 107, 0.18));
-            border: 1px solid rgba(83, 109, 254, 0.12);
+            background: linear-gradient(135deg, rgba(141, 109, 61, 0.16), rgba(36, 51, 79, 0.08));
+            border: 1px solid rgba(141, 109, 61, 0.14);
             flex-shrink: 0;
         }
 
@@ -202,7 +208,7 @@
         nav a:hover,
         nav a:focus-visible,
         nav a.is-current {
-            background: var(--primary-soft);
+            background: var(--surface-soft);
             color: var(--heading);
             outline: none;
         }
@@ -262,11 +268,12 @@
             gap: 8px;
             padding: 7px 12px;
             border-radius: 999px;
-            background: var(--primary-soft);
+            background: transparent;
+            border: 1px solid rgba(141, 109, 61, 0.2);
             color: var(--primary);
             font-size: 0.76rem;
-            font-weight: 800;
-            letter-spacing: 0.12em;
+            font-weight: 700;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
         }
 
@@ -330,7 +337,7 @@
             width: 220px;
             height: 220px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(83, 109, 254, 0.18), transparent 70%);
+            background: radial-gradient(circle, rgba(141, 109, 61, 0.14), transparent 70%);
             pointer-events: none;
         }
 
@@ -366,13 +373,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, var(--accent), #314462);
             color: #ffffff;
         }
 
         .btn-secondary {
-            background: var(--surface-strong);
-            border-color: var(--border);
+            background: rgba(255, 255, 255, 0.38);
+            border-color: rgba(141, 109, 61, 0.22);
             color: var(--heading);
         }
 
@@ -477,7 +484,7 @@
         .hero-copy,
         .hero-aside {
             border: 1px solid var(--border);
-            border-radius: 24px;
+            border-radius: 26px;
             box-shadow: var(--shadow);
             backdrop-filter: blur(16px);
         }
@@ -493,8 +500,9 @@
             align-items: center;
             justify-content: center;
             border-radius: 14px;
-            background: linear-gradient(135deg, rgba(83, 109, 254, 0.18), rgba(255, 124, 107, 0.18));
+            background: linear-gradient(135deg, rgba(141, 109, 61, 0.14), rgba(36, 51, 79, 0.08));
             color: var(--primary);
+            border: 1px solid rgba(141, 109, 61, 0.14);
             margin-bottom: 12px;
         }
 
@@ -536,7 +544,8 @@
         .event-side-label {
             padding: 8px 12px;
             border-radius: 999px;
-            background: var(--primary-soft);
+            background: transparent;
+            border: 1px solid rgba(141, 109, 61, 0.2);
             color: var(--primary);
             font-size: 0.82rem;
             font-weight: 700;
@@ -565,7 +574,7 @@
             font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.12em;
         }
 
         .player-title {
@@ -595,7 +604,7 @@
             padding: 0 16px;
             border: 0;
             border-radius: 999px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, var(--accent), #314462);
             color: #ffffff;
             font-weight: 700;
             cursor: pointer;
@@ -644,8 +653,8 @@
         .sermon-item:focus-visible,
         .sermon-item.active {
             transform: translateY(-1px);
-            border-color: rgba(83, 109, 254, 0.35);
-            background: var(--primary-soft);
+            border-color: rgba(141, 109, 61, 0.28);
+            background: rgba(141, 109, 61, 0.08);
             outline: none;
         }
 
@@ -684,7 +693,7 @@
             grid-template-columns: minmax(0, 1fr) auto;
             gap: 16px;
             align-items: center;
-            background: linear-gradient(135deg, rgba(83, 109, 254, 0.16), rgba(255, 124, 107, 0.16)), var(--surface);
+            background: linear-gradient(135deg, rgba(141, 109, 61, 0.14), rgba(36, 51, 79, 0.06)), var(--surface);
         }
 
         .radio-copy h2 {
@@ -936,9 +945,9 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-copy surface-card reveal">
-                        <span class="eyebrow">Faith. Fellowship. Antwerpen.</span>
-                        <h1>Short, warm, and welcoming.</h1>
-                        <p>Join us for Sunday worship, prayer gatherings, recent sermons, and round-the-clock radio - all in one simple place.</p>
+                        <span class="eyebrow">Worship in Antwerp</span>
+                        <h1>A graceful place to worship, pray, and belong.</h1>
+                        <p>Discover a calm church home for Sunday worship, prayer gatherings, recent sermons, and quiet encouragement through TC Radios.</p>
                         <div class="hero-actions">
                             <a href="#sermons" class="btn btn-primary">Listen to sermons</a>
                             <a href="#contact" class="btn btn-secondary">Plan a visit</a>
@@ -953,8 +962,8 @@
                     <div class="hero-stack">
                         <div class="hero-aside surface-card reveal">
                             <span class="card-kicker">This week</span>
-                            <h3>Simple ways to stay connected.</h3>
-                            <p class="hero-note">Worship with us in Antwerp, pray with the church, and keep listening through the week.</p>
+                            <h3>Rooted in prayer. Open in welcome.</h3>
+                            <p class="hero-note">Worship with us in Antwerp, pray with the church, and stay spiritually connected through the week.</p>
                             <div class="mini-meta" style="margin-top:14px;">
                                 <span><i class="fas fa-church"></i>Sunday worship</span>
                                 <span><i class="fas fa-headphones"></i>Online sermons</span>
@@ -980,15 +989,15 @@
                 <div class="section-heading reveal">
                     <div class="section-copy">
                         <span class="eyebrow">About us</span>
-                        <h2>A church family centered on Christ.</h2>
+                        <h2>A simple, Christ-centered church family.</h2>
                     </div>
-                    <p>We welcome people who are seeking worship, prayer, fellowship, and steady spiritual growth.</p>
+                    <p>We welcome people seeking reverent worship, faithful prayer, and lasting spiritual growth.</p>
                 </div>
 
                 <div class="about-grid">
                     <article class="story-brief reveal">
                         <span class="card-kicker">Who we are</span>
-                        <h3>Warm faith, rich roots, and an open invitation.</h3>
+                        <h3>Rich roots, gentle faith, and an open invitation.</h3>
                         <p>Founded in 1968 in India, New Jerusalem Church continues to serve the spiritual needs of believers in Belgium while embracing a multicultural congregation.</p>
                         <p>Our mission is to share the Gospel of Jesus Christ, nurture spiritual growth, and serve people with love and compassion.</p>
                         <div class="story-tags" style="margin-top:14px;">
@@ -1023,7 +1032,7 @@
                 <div class="section-heading compact reveal">
                     <div class="section-copy">
                         <span class="eyebrow">Church life</span>
-                        <h2>Everything important, at a glance.</h2>
+                        <h2>A graceful rhythm for worship and prayer.</h2>
                     </div>
                 </div>
                 <div class="detail-grid">
@@ -1051,9 +1060,9 @@
                 <div class="section-heading compact reveal">
                     <div class="section-copy">
                         <span class="eyebrow">Upcoming events</span>
-                        <h2>Next gatherings</h2>
+                        <h2>What is coming next</h2>
                     </div>
-                    <p>Easy to scan, so you can see what is next quickly.</p>
+                    <p>A quiet, easy view of the next services and prayer gatherings.</p>
                 </div>
                 <div class="events-list" id="events-container">
                     <article class="event-row reveal reveal-visible">
@@ -1073,9 +1082,9 @@
                 <div class="section-heading compact reveal">
                     <div class="section-copy">
                         <span class="eyebrow">Recent sermons</span>
-                        <h2>Compact list, one shared player.</h2>
+                        <h2>Recent sermons, thoughtfully arranged.</h2>
                     </div>
-                    <p>Pick any message from the list and play it in one clean player.</p>
+                    <p>Select any message from the list and listen through one shared player.</p>
                 </div>
 
                 <div class="sermon-shell">
@@ -1122,8 +1131,8 @@
                 <div class="radio-band reveal">
                     <div class="radio-copy">
                         <span class="eyebrow">TC Radios</span>
-                        <h2>Stay connected through the week.</h2>
-                        <p>Listen to uplifting Christian music, biblical teaching, and encouraging programming anytime.</p>
+                        <h2>Stay encouraged through the week.</h2>
+                        <p>Listen to uplifting Christian music, biblical teaching, and gentle encouragement anytime.</p>
                         <div class="radio-tags" style="margin-top:14px;">
                             <span><i class="fas fa-circle-play"></i>Instant access</span>
                             <span><i class="fas fa-globe"></i>Available worldwide</span>
@@ -1142,7 +1151,7 @@
                 <div class="section-heading compact reveal">
                     <div class="section-copy">
                         <span class="eyebrow">Contact</span>
-                        <h2>Visit or reach out.</h2>
+                        <h2>Visit us in Antwerp.</h2>
                     </div>
                 </div>
                 <div class="contact-grid">
