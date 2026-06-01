@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Weekly Letter: Walk in Hope",
+        "type": "letter",
+        "summary": "This week's letter encourages every family to stay rooted in prayer and hope.",
+        "date": "2026-05-31",
+        "tags": ["family", "prayer", "hope"]
+    },
+    {
+        "title": "Pentecost Service Announcement",
+        "type": "announcement",
+        "summary": "Join us for a special Pentecost worship service with communion and fellowship.",
+        "date": "2026-05-24",
+        "tags": ["church", "special service", "worship"]
+    },
+    {
+        "title": "Daily Bread: Trust in Every Season",
+        "type": "daily bread",
+        "summary": "A short daily bread reflection on trusting the Lord in changing seasons.",
+        "date": "2026-05-23",
+        "tags": ["daily bread", "devotional", "faith"]
+    },
+    {
+        "title": "May Community Newsletter",
+        "type": "newsletter",
+        "summary": "A monthly newsletter with testimonies, ministry updates, and prayer points.",
+        "date": "2026-05-20",
+        "tags": ["newsletter", "community", "updates"]
+    },
+    {
+        "title": "Sunday Message Summary",
+        "type": "sermons",
+        "summary": "Highlights from Sunday's message are now published for easy sharing.",
+        "date": "2026-05-18",
+        "tags": ["word", "sunday"]
+    }
+]

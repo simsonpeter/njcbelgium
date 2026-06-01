@@ -506,9 +506,64 @@
             margin-bottom: 12px;
         }
 
-        .events-list {
+        .events-list,
+        .posts-list {
             display: grid;
             gap: 12px;
+        }
+
+        .post-card {
+            display: grid;
+            gap: 12px;
+            padding: 18px 20px;
+            border-radius: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+
+        .post-heading {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px 14px;
+        }
+
+        .post-heading h3 {
+            margin: 0;
+        }
+
+        .post-type-badges,
+        .post-meta,
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .post-type-badges span,
+        .post-meta span,
+        .post-tags span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: var(--surface-strong);
+            border: 1px solid var(--border);
+            font-size: 0.88rem;
+        }
+
+        .post-type-badges span {
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .post-priority {
+            border-color: rgba(141, 109, 61, 0.34);
+            background: rgba(141, 109, 61, 0.12);
+            color: var(--primary);
         }
 
         .event-row {
@@ -905,7 +960,8 @@
                 display: none;
             }
 
-            .event-row {
+            .event-row,
+            .post-card {
                 grid-template-columns: 1fr;
                 align-items: start;
             }
@@ -927,6 +983,8 @@
             .quick-tags,
             .story-tags,
             .radio-tags,
+            .post-meta,
+            .post-tags,
             .footer-shell,
             .footer-links,
             .social-links {
@@ -980,6 +1038,7 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#services">Life</a></li>
                         <li><a href="#events">Events</a></li>
+                        <li><a href="#posts">Posts</a></li>
                         <li><a href="#sermons">Sermons</a></li>
                         <li><a href="#radio">Radio</a></li>
                         <li><a href="#contact">Contact</a></li>
@@ -1134,6 +1193,32 @@
             </div>
         </section>
 
+        <section id="posts" class="section">
+            <div class="container">
+                <div class="section-heading compact reveal">
+                    <div class="section-copy">
+                        <span class="eyebrow">Latest posts</span>
+                        <h2>Announcements, letters, and spiritual updates.</h2>
+                    </div>
+                    <p>Daily bread, newsletter, and sermon highlights with tags on every post.</p>
+                </div>
+                <div class="posts-list" id="posts-container">
+                    <article class="post-card reveal reveal-visible">
+                        <div class="post-heading">
+                            <h3>Loading posts...</h3>
+                            <div class="post-type-badges">
+                                <span>Loading</span>
+                            </div>
+                        </div>
+                        <p>Please wait while latest updates are loaded.</p>
+                        <div class="post-tags">
+                            <span>#loading</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <section id="sermons" class="section">
             <div class="container">
                 <div class="section-heading compact reveal">
@@ -1253,6 +1338,7 @@
                 <div class="footer-links">
                     <a href="#about">About</a>
                     <a href="#events">Events</a>
+                    <a href="#posts">Posts</a>
                     <a href="#sermons">Sermons</a>
                     <a href="#contact">Contact</a>
                 </div>
@@ -1284,6 +1370,7 @@
         const sermonPickerCard = document.querySelector('.sermon-list-card');
         const sermonPickerToggle = document.getElementById('sermon-picker-toggle');
         const sermonPickerLabel = document.getElementById('sermon-picker-label');
+        const postsContainer = document.getElementById('posts-container');
         let sermonState = [];
         let activeSermonIndex = 0;
 
@@ -1541,6 +1628,149 @@
             return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
+        function formatPostDate(dateString) {
+            if (!dateString) {
+                return 'Latest update';
+            }
+            const parsed = new Date(`${dateString}T12:00:00`);
+            if (Number.isNaN(parsed.getTime())) {
+                return escapeHtml(dateString);
+            }
+            return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function normalizePostType(value) {
+            const normalized = String(value || 'announcement').trim().toLowerCase();
+            if (!normalized) {
+                return 'announcement';
+            }
+            if (normalized === 'sermons') {
+                return 'sermon';
+            }
+            return normalized;
+        }
+
+        function formatPostTypeLabel(type) {
+            return type.split(/\s+/).map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+        }
+
+        function normalizePost(post, index) {
+            const sourceTypes = Array.isArray(post.types)
+                ? post.types
+                : (post.type ? [post.type] : ['announcement']);
+            const types = [...new Set(sourceTypes.map(normalizePostType).filter(Boolean))];
+            if (!types.length) {
+                types.push('announcement');
+            }
+            if (types.includes('letter') && !types.includes('announcement')) {
+                types.push('announcement');
+            }
+
+            const incomingTags = Array.isArray(post.tags)
+                ? post.tags.map((tag) => String(tag || '').trim()).filter(Boolean)
+                : [];
+            const tags = [...new Set(incomingTags)];
+            if (!tags.length) {
+                tags.push(types[0], 'church update');
+            }
+
+            const isImportant = types.includes('sermon') || tags.some((tag) => tag.toLowerCase() === 'important');
+            if (types.includes('sermon') && !tags.some((tag) => tag.toLowerCase() === 'important')) {
+                tags.push('important');
+            }
+
+            return {
+                title: post.title || `Church update ${index + 1}`,
+                summary: post.summary || post.description || 'Stay connected with church updates and encouragement.',
+                date: post.date || '',
+                types,
+                tags,
+                url: post.url || '',
+                isImportant
+            };
+        }
+
+        function renderPosts(posts) {
+            if (!postsContainer) {
+                return;
+            }
+
+            const fallbackPosts = [{
+                title: 'Weekly church update',
+                summary: 'Please check back shortly for the latest announcement, letter, and newsletter updates.',
+                date: '',
+                types: ['announcement'],
+                tags: ['church update']
+            }];
+
+            const items = (Array.isArray(posts) && posts.length ? posts : fallbackPosts)
+                .map((post, index) => normalizePost(post, index))
+                .sort((first, second) => {
+                    const firstDate = new Date(`${first.date || '1970-01-01'}T12:00:00`).getTime();
+                    const secondDate = new Date(`${second.date || '1970-01-01'}T12:00:00`).getTime();
+                    return secondDate - firstDate;
+                });
+
+            postsContainer.innerHTML = items.map((post) => {
+                const badges = post.types
+                    .map((type) => `<span>${escapeHtml(formatPostTypeLabel(type))}</span>`)
+                    .join('');
+                const importantBadge = post.isImportant
+                    ? '<span class="post-priority"><i class="fas fa-star"></i>Important</span>'
+                    : '';
+                const tags = post.tags
+                    .map((tag) => `<span>#${escapeHtml(tag)}</span>`)
+                    .join('');
+                const linkedTitle = post.url
+                    ? `<a href="${escapeHtml(post.url)}" target="_blank" rel="noreferrer">${escapeHtml(post.title)}</a>`
+                    : escapeHtml(post.title);
+
+                return `
+                    <article class="post-card reveal reveal-visible">
+                        <div class="post-heading">
+                            <h3>${linkedTitle}</h3>
+                            <div class="post-type-badges">${badges}</div>
+                        </div>
+                        <p>${escapeHtml(post.summary)}</p>
+                        <div class="post-meta">
+                            <span><i class="far fa-calendar"></i>${formatPostDate(post.date)}</span>
+                            ${importantBadge}
+                        </div>
+                        <div class="post-tags">${tags}</div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        async function fetchPosts() {
+            const sources = ['./posts.json', 'https://raw.githubusercontent.com/simsonpeter/njcbelgium/main/posts.json'];
+            for (const source of sources) {
+                try {
+                    const response = await fetch(source, { cache: 'no-store' });
+                    if (!response.ok) {
+                        continue;
+                    }
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                        return data;
+                    }
+                } catch (error) {
+                    console.warn('Unable to load posts from', source, error);
+                }
+            }
+            throw new Error('Failed to load posts from available sources.');
+        }
+
+        async function loadPosts() {
+            try {
+                const posts = await fetchPosts();
+                renderPosts(posts);
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                renderPosts([]);
+            }
+        }
+
         function displayEvents(events) {
             const eventsContainer = document.getElementById('events-container');
             const fallbackEvents = [
@@ -1729,6 +1959,7 @@
             const prayerMeetings = getNextPrayerMeetings(belgianDate);
             const allEvents = [sundayService, ...prayerMeetings].sort((a, b) => new Date(a.date) - new Date(b.date));
             displayEvents(allEvents.slice(0, 4));
+            loadPosts();
             loadSermons();
             observeRevealElements();
             observeSections();
