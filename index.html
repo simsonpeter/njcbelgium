@@ -493,6 +493,61 @@
             margin-top: 10px;
         }
 
+        .announcement-grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .announcement-card {
+            display: grid;
+            gap: 14px;
+            padding: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+        }
+
+        .announcement-header {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .announcement-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: transparent;
+            border: 1px solid rgba(141, 109, 61, 0.2);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .announcement-date {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            white-space: nowrap;
+        }
+
+        .announcement-card p {
+            color: var(--text-muted);
+        }
+
+        .announcement-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .icon-chip {
             width: 44px;
             height: 44px;
@@ -823,7 +878,8 @@
             .sermon-shell,
             .radio-band,
             .detail-grid,
-            .contact-grid {
+            .contact-grid,
+            .announcement-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -939,6 +995,13 @@
             }
         }
 
+
+        @media (max-width: 900px) {
+            .announcement-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
@@ -980,6 +1043,7 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#services">Life</a></li>
                         <li><a href="#events">Events</a></li>
+                        <li><a href="#announcements">Announcements</a></li>
                         <li><a href="#sermons">Sermons</a></li>
                         <li><a href="#radio">Radio</a></li>
                         <li><a href="#contact">Contact</a></li>
@@ -1129,6 +1193,33 @@
                             <p>Please wait while the schedule is prepared.</p>
                         </div>
                         <span class="event-side-label">Loading</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="announcements" class="section">
+            <div class="container">
+                <div class="section-heading compact reveal">
+                    <div class="section-copy">
+                        <span class="eyebrow">Announcements</span>
+                        <h2>Latest posts for the church family.</h2>
+                    </div>
+                    <p>See the latest letter, daily bread, newsletter, and the most recent important sermon in one place.</p>
+                </div>
+                <div class="announcement-grid" id="announcements-container">
+                    <article class="announcement-card reveal reveal-visible">
+                        <div class="announcement-header">
+                            <span class="announcement-type"><i class="fas fa-bullhorn"></i>Announcement</span>
+                            <span class="announcement-date">Loading...</span>
+                        </div>
+                        <div>
+                            <h3>Loading announcements...</h3>
+                            <p>Please wait while the latest posts are prepared.</p>
+                        </div>
+                        <div class="mini-meta">
+                            <span><i class="fas fa-tag"></i>Loading</span>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -1541,6 +1632,149 @@
             return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
+        function normalizePostType(type) {
+            const normalized = String(type || 'announcement').trim().toLowerCase();
+            const singularTypeMap = {
+                sermons: 'sermon',
+                letters: 'letter',
+                newsletters: 'newsletter',
+                'daily breads': 'daily bread'
+            };
+            return singularTypeMap[normalized] || normalized;
+        }
+
+        function formatPostType(type) {
+            return normalizePostType(type)
+                .split(' ')
+                .filter(Boolean)
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+
+        function formatPostDate(dateString) {
+            if (!dateString) {
+                return 'Latest update';
+            }
+            const parsed = new Date(`${dateString}T12:00:00`);
+            if (Number.isNaN(parsed.getTime())) {
+                return escapeHtml(dateString);
+            }
+            return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function getPostTags(post) {
+            const baseTags = Array.isArray(post.tags) ? post.tags : [];
+            const typeLabel = formatPostType(post.type);
+            const importantTag = post.isImportant ? 'Important' : '';
+            const tags = [typeLabel, importantTag, ...baseTags]
+                .map((tag) => String(tag || '').trim())
+                .filter(Boolean);
+
+            return Array.from(new Map(tags.map((tag) => [tag.toLowerCase(), tag])).values());
+        }
+
+        async function fetchAnnouncements() {
+            const sources = ['./announcements.json', 'https://raw.githubusercontent.com/simsonpeter/njcbelgium/main/announcements.json'];
+            for (const source of sources) {
+                try {
+                    const response = await fetch(source, { cache: 'no-store' });
+                    if (!response.ok) {
+                        continue;
+                    }
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                        return data;
+                    }
+                } catch (error) {
+                    console.warn('Unable to load announcements from', source, error);
+                }
+            }
+            throw new Error('Failed to load announcements from available sources.');
+        }
+
+        function buildLatestSermonAnnouncement(sermons) {
+            if (!Array.isArray(sermons) || !sermons.length) {
+                return null;
+            }
+
+            const [latestSermon] = [...sermons].sort((first, second) => {
+                const firstDate = new Date(`${first.date || '1970-01-01'}T12:00:00`).getTime();
+                const secondDate = new Date(`${second.date || '1970-01-01'}T12:00:00`).getTime();
+                return secondDate - firstDate;
+            });
+
+            return {
+                title: latestSermon.title || 'Latest sermon',
+                description: latestSermon.subtitle || 'Listen to the latest sermon message from the church.',
+                date: latestSermon.date,
+                type: 'sermon',
+                isImportant: true,
+                tags: latestSermon.speaker ? [latestSermon.speaker] : [],
+                url: '#sermons',
+                actionText: 'Open sermon'
+            };
+        }
+
+        function renderAnnouncements(announcements, sermons) {
+            const announcementsContainer = document.getElementById('announcements-container');
+            if (!announcementsContainer) {
+                return;
+            }
+
+            const latestSermon = buildLatestSermonAnnouncement(sermons);
+            const items = [...(Array.isArray(announcements) ? announcements : [])];
+            if (latestSermon) {
+                items.push(latestSermon);
+            }
+
+            items.sort((first, second) => {
+                const firstDate = new Date(`${first.date || '1970-01-01'}T12:00:00`).getTime();
+                const secondDate = new Date(`${second.date || '1970-01-01'}T12:00:00`).getTime();
+                return secondDate - firstDate;
+            });
+
+            if (!items.length) {
+                announcementsContainer.innerHTML = `
+                    <article class="announcement-card reveal reveal-visible">
+                        <div class="announcement-header">
+                            <span class="announcement-type"><i class="fas fa-bullhorn"></i>Announcement</span>
+                            <span class="announcement-date">Latest update</span>
+                        </div>
+                        <div>
+                            <h3>No announcements available</h3>
+                            <p>Please check back later for letters, daily bread, newsletters, and sermons.</p>
+                        </div>
+                        <div class="mini-meta">
+                            <span><i class="fas fa-tag"></i>Announcement</span>
+                        </div>
+                    </article>
+                `;
+                return;
+            }
+
+            announcementsContainer.innerHTML = items.map((post) => {
+                const postTags = getPostTags(post);
+                const isExternalLink = typeof post.url === 'string' && /^https?:\/\//i.test(post.url);
+                const linkAttributes = isExternalLink ? ' target="_blank" rel="noreferrer"' : '';
+                return `
+                    <article class="announcement-card reveal reveal-visible">
+                        <div class="announcement-header">
+                            <span class="announcement-type"><i class="fas fa-bullhorn"></i>${escapeHtml(formatPostType(post.type))}</span>
+                            <span class="announcement-date">${formatPostDate(post.date)}</span>
+                        </div>
+                        <div>
+                            <h3>${escapeHtml(post.title || 'Church update')}</h3>
+                            <p>${escapeHtml(post.description || 'Stay connected with the latest update from New Jerusalem Church.')}</p>
+                        </div>
+                        <div class="mini-meta">
+                            ${postTags.map((tag) => `<span><i class="fas fa-tag"></i>${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+                        ${post.url ? `<a class="ghost-link announcement-link" href="${escapeHtml(post.url)}"${linkAttributes}>${escapeHtml(post.actionText || 'Open update')}</a>` : ''}
+                    </article>
+                `;
+            }).join('');
+        }
+
         function displayEvents(events) {
             const eventsContainer = document.getElementById('events-container');
             const fallbackEvents = [
@@ -1609,10 +1843,12 @@
             const title = sermon.title || 'Sermon';
             const subtitle = sermon.subtitle || 'Listen to the selected message.';
             const speaker = sermon.speaker ? `<span><i class="fas fa-user"></i>${escapeHtml(sermon.speaker)}</span>` : '';
+            const sermonTags = getPostTags({ type: 'sermon', tags: sermon.tags }).map((tag) => `<span><i class="fas fa-tag"></i>${escapeHtml(tag)}</span>`).join('');
 
             playerTitle.textContent = title;
             playerSubtitle.textContent = subtitle;
             playerMeta.innerHTML = `
+                ${sermonTags}
                 <span><i class="far fa-calendar"></i>${formatSermonDate(sermon.date)}</span>
                 ${speaker}
             `;
@@ -1676,6 +1912,7 @@
                             <h3>${escapeHtml(sermon.title || 'Sermon')}</h3>
                             <p>${escapeHtml(sermon.subtitle || sermon.speaker || 'Tap to listen')}</p>
                             <span class="mini-meta" style="margin-top:10px;">
+                                ${getPostTags({ type: 'sermon', tags: sermon.tags }).map((tag) => `<span><i class="fas fa-tag"></i>${escapeHtml(tag)}</span>`).join('')}
                                 <span><i class="far fa-calendar"></i>${formatSermonDate(sermon.date)}</span>
                                 ${sermon.speaker ? `<span><i class="fas fa-user"></i>${escapeHtml(sermon.speaker)}</span>` : ''}
                             </span>
@@ -1696,18 +1933,32 @@
         }
 
         async function loadSermons() {
+            const fallbackSermons = [{
+                title: "Lord's Supper",
+                subtitle: 'Karatharin Panthi',
+                speaker: 'Pastor Simson',
+                audioUrl: 'https://archive.org/download/aud-20220912-wa-0004/AUD-20250406-WA0003.m4a',
+                date: '2025-04-06'
+            }];
+
             try {
                 const sermons = await fetchSermons();
                 renderSermons(sermons);
+                return sermons;
             } catch (error) {
                 console.error('Error loading sermons:', error);
-                renderSermons([{
-                    title: "Lord's Supper",
-                    subtitle: 'Karatharin Panthi',
-                    speaker: 'Pastor Simson',
-                    audioUrl: 'https://archive.org/download/aud-20220912-wa-0004/AUD-20250406-WA0003.m4a',
-                    date: '2025-04-06'
-                }]);
+                renderSermons(fallbackSermons);
+                return fallbackSermons;
+            }
+        }
+
+        async function loadAnnouncements(sermons) {
+            try {
+                const announcements = await fetchAnnouncements();
+                renderAnnouncements(announcements, sermons);
+            } catch (error) {
+                console.error('Error loading announcements:', error);
+                renderAnnouncements([], sermons);
             }
         }
 
@@ -1718,7 +1969,7 @@
             setActiveSermon(activeSermonIndex, true);
         });
 
-        function initializePage() {
+        async function initializePage() {
             const belgianDate = getBelgianDate();
             const sundayService = {
                 title: 'Sunday Worship Service',
@@ -1729,7 +1980,8 @@
             const prayerMeetings = getNextPrayerMeetings(belgianDate);
             const allEvents = [sundayService, ...prayerMeetings].sort((a, b) => new Date(a.date) - new Date(b.date));
             displayEvents(allEvents.slice(0, 4));
-            loadSermons();
+            const sermons = await loadSermons();
+            await loadAnnouncements(sermons);
             observeRevealElements();
             observeSections();
         }

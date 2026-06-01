@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Latest church letter",
+    "description": "Read the newest pastoral letter with encouragement, prayer points, and church updates for the congregation.",
+    "date": "2026-06-01",
+    "type": "letter",
+    "tags": ["Pastoral", "Church update", "Prayer"]
+  },
+  {
+    "title": "Daily Bread reflection",
+    "description": "Meditate on a short daily bread devotion prepared to strengthen everyday faith in Christ.",
+    "date": "2026-05-31",
+    "type": "daily bread",
+    "tags": ["Devotion", "Bible", "Encouragement"]
+  },
+  {
+    "title": "Monthly church newsletter",
+    "description": "Catch up on testimonies, ministry highlights, and upcoming life in the church through the latest newsletter.",
+    "date": "2026-05-29",
+    "type": "newsletter",
+    "tags": ["Community", "Ministry", "Updates"]
+  }
+]
