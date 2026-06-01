@@ -1,0 +1,27 @@
+[
+    {
+        "title": "June Church Letter",
+        "subtitle": "New monthly church letter is now published for everyone.",
+        "description": "Please read the latest church letter and share with family groups.",
+        "postType": "newsletter",
+        "date": "2026-06-01",
+        "isImportant": true,
+        "tags": [
+            "Newsletter",
+            "Letter",
+            "Church Update"
+        ]
+    },
+    {
+        "title": "Daily Bread - Trust the Lord Daily",
+        "subtitle": "A short daily bread reflection for spiritual encouragement.",
+        "description": "Read and meditate on today's daily bread before prayer time.",
+        "postType": "daily bread",
+        "date": "2026-05-31",
+        "tags": [
+            "Daily Bread",
+            "Reflection",
+            "Prayer"
+        ]
+    }
+]
