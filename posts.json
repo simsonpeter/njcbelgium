@@ -1,0 +1,30 @@
+[
+  {
+    "title": "The Leading Holy Spirit",
+    "summary": "This week's sermon is highlighted in announcements so visitors can quickly find the newest message and listen online.",
+    "type": "sermon",
+    "date": "2026-05-24",
+    "featured": true,
+    "tags": ["Important", "Sunday Message", "Audio Available"],
+    "link": "#sermons",
+    "linkLabel": "Open sermon"
+  },
+  {
+    "title": "Daily Bread: Walking in Quiet Faith",
+    "summary": "A short daily bread encouragement for the week, calling the church to stay rooted in prayer, Scripture, and steady obedience.",
+    "type": "daily bread",
+    "date": "2026-05-26",
+    "tags": ["Devotional", "Prayer", "Scripture"],
+    "link": "#about",
+    "linkLabel": "Read encouragement"
+  },
+  {
+    "title": "Church Letter: May Ministry Update",
+    "summary": "The latest church letter is now posted in announcements as well, with ministry updates, prayer focus, and upcoming church life notes.",
+    "type": "newsletter",
+    "date": "2026-05-28",
+    "tags": ["New Letter", "Church Update", "Prayer Focus"],
+    "link": "#contact",
+    "linkLabel": "Request newsletter"
+  }
+]

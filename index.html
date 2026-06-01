@@ -386,6 +386,7 @@
         .quick-tags,
         .story-tags,
         .radio-tags,
+        .announcement-tags,
         .event-meta,
         .sermon-meta,
         .mini-meta {
@@ -397,6 +398,7 @@
         .quick-tags span,
         .story-tags span,
         .radio-tags span,
+        .announcement-tags span,
         .event-meta span,
         .sermon-meta span,
         .mini-meta span {
@@ -462,6 +464,7 @@
         .detail-card,
         .contact-card,
         .event-row,
+        .announcement-card,
         .player-card,
         .sermon-list-card,
         .footer-shell,
@@ -476,6 +479,7 @@
         .detail-card,
         .contact-card,
         .event-row,
+        .announcement-card,
         .player-card,
         .sermon-list-card,
         .footer-shell,
@@ -509,6 +513,60 @@
         .events-list {
             display: grid;
             gap: 12px;
+        }
+
+        .announcement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .announcement-card {
+            display: grid;
+            gap: 14px;
+            align-content: start;
+            padding: 24px;
+        }
+
+        .announcement-topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .announcement-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(141, 109, 61, 0.12);
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .announcement-card h3 {
+            color: var(--heading);
+            margin-bottom: 0;
+            font-size: 1.15rem;
+            line-height: 1.2;
+        }
+
+        .announcement-summary {
+            color: var(--text-muted);
+        }
+
+        .announcement-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-weight: 700;
         }
 
         .event-row {
@@ -822,6 +880,7 @@
             .about-grid,
             .sermon-shell,
             .radio-band,
+            .announcement-grid,
             .detail-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -887,6 +946,7 @@
             .story-brief,
             .mini-card,
             .event-row,
+            .announcement-card,
             .player-card,
             .sermon-list-card,
             .radio-band,
@@ -927,6 +987,7 @@
             .quick-tags,
             .story-tags,
             .radio-tags,
+            .announcement-topline,
             .footer-shell,
             .footer-links,
             .social-links {
@@ -980,6 +1041,7 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#services">Life</a></li>
                         <li><a href="#events">Events</a></li>
+                        <li><a href="#announcements">Announcements</a></li>
                         <li><a href="#sermons">Sermons</a></li>
                         <li><a href="#radio">Radio</a></li>
                         <li><a href="#contact">Contact</a></li>
@@ -1134,6 +1196,33 @@
             </div>
         </section>
 
+        <section id="announcements" class="section">
+            <div class="container">
+                <div class="section-heading compact reveal">
+                    <div class="section-copy">
+                        <span class="eyebrow">Announcements</span>
+                        <h2>Important church posts in one place.</h2>
+                    </div>
+                    <p>Sermon posts are highlighted first, with daily bread and newsletter updates shown alongside them.</p>
+                </div>
+                <div class="announcement-grid" id="announcements-container">
+                    <article class="announcement-card reveal reveal-visible" aria-busy="true">
+                        <div class="announcement-topline">
+                            <span class="announcement-badge">Loading</span>
+                            <span class="card-kicker">Please wait</span>
+                        </div>
+                        <div>
+                            <h3>Loading announcements...</h3>
+                            <p class="announcement-summary">Latest sermon, daily bread, and newsletter posts are being prepared.</p>
+                        </div>
+                        <div class="announcement-tags">
+                            <span><i class="fas fa-tag"></i>Announcement</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <section id="sermons" class="section">
             <div class="container">
                 <div class="section-heading compact reveal">
@@ -1253,6 +1342,7 @@
                 <div class="footer-links">
                     <a href="#about">About</a>
                     <a href="#events">Events</a>
+                    <a href="#announcements">Announcements</a>
                     <a href="#sermons">Sermons</a>
                     <a href="#contact">Contact</a>
                 </div>
@@ -1281,6 +1371,7 @@
         const playerMeta = document.getElementById('player-meta');
         const playerButton = document.getElementById('player-play-button');
         const playerDownloadLink = document.getElementById('player-download-link');
+        const announcementsContainer = document.getElementById('announcements-container');
         const sermonPickerCard = document.querySelector('.sermon-list-card');
         const sermonPickerToggle = document.getElementById('sermon-picker-toggle');
         const sermonPickerLabel = document.getElementById('sermon-picker-label');
@@ -1541,6 +1632,150 @@
             return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
+        function formatPostType(type) {
+            const normalizedType = String(type || '').trim().toLowerCase();
+            if (normalizedType === 'daily bread') {
+                return 'Daily Bread';
+            }
+            if (normalizedType === 'newsletter') {
+                return 'Newsletter';
+            }
+            return 'Sermon';
+        }
+
+        function buildPostTags(post) {
+            const tags = [formatPostType(post.type)];
+            if (post.featured || String(post.type || '').trim().toLowerCase() === 'sermon') {
+                tags.push('Important');
+            }
+            if (Array.isArray(post.tags)) {
+                tags.push(...post.tags);
+            }
+            return [...new Set(tags.filter(Boolean))];
+        }
+
+        function getDefaultPostLinkLabel(post) {
+            const typeLabel = formatPostType(post.type);
+            if (typeLabel === 'Daily Bread') {
+                return 'Read daily bread';
+            }
+            if (typeLabel === 'Newsletter') {
+                return 'Open newsletter';
+            }
+            return 'Open sermon';
+        }
+
+        function sortPosts(posts) {
+            return [...posts].sort((first, second) => {
+                const firstType = String(first.type || '').trim().toLowerCase();
+                const secondType = String(second.type || '').trim().toLowerCase();
+                const firstPriority = firstType === 'sermon' ? (first.featured ? 0 : 1) : 2;
+                const secondPriority = secondType === 'sermon' ? (second.featured ? 0 : 1) : 2;
+                if (firstPriority !== secondPriority) {
+                    return firstPriority - secondPriority;
+                }
+
+                const firstDate = new Date(`${first.date || '1970-01-01'}T12:00:00`).getTime();
+                const secondDate = new Date(`${second.date || '1970-01-01'}T12:00:00`).getTime();
+                return secondDate - firstDate;
+            });
+        }
+
+        function renderAnnouncements(posts) {
+            if (!announcementsContainer) {
+                return;
+            }
+
+            const fallbackPosts = [
+                {
+                    title: 'Latest sermon announcement',
+                    summary: 'Recent sermons are highlighted here as important announcements for the church.',
+                    type: 'sermon',
+                    featured: true,
+                    date: '2026-05-24',
+                    tags: ['Important', 'Audio Available'],
+                    link: '#sermons',
+                    linkLabel: 'Open sermon'
+                },
+                {
+                    title: 'Daily Bread encouragement',
+                    summary: 'Short daily bread updates can be shared here for the church family.',
+                    type: 'daily bread',
+                    date: '2026-05-26',
+                    tags: ['Devotional', 'Prayer'],
+                    link: '#about',
+                    linkLabel: 'Read daily bread'
+                },
+                {
+                    title: 'Newsletter announcement',
+                    summary: 'New letters and newsletter updates also appear in announcements.',
+                    type: 'newsletter',
+                    date: '2026-05-28',
+                    tags: ['New Letter', 'Church Update'],
+                    link: '#contact',
+                    linkLabel: 'Open newsletter'
+                }
+            ];
+            const items = sortPosts(Array.isArray(posts) && posts.length ? posts : fallbackPosts);
+
+            announcementsContainer.innerHTML = items.map((post) => {
+                const typeLabel = formatPostType(post.type);
+                const badge = post.featured || typeLabel === 'Sermon' ? 'Important' : 'Update';
+                const tags = buildPostTags(post);
+                return `
+                    <article class="announcement-card reveal reveal-visible">
+                        <div class="announcement-topline">
+                            <span class="announcement-badge">${escapeHtml(typeLabel)}</span>
+                            <span class="card-kicker">${escapeHtml(badge)}</span>
+                        </div>
+                        <div>
+                            <h3>${escapeHtml(post.title || `${typeLabel} post`)}</h3>
+                            <div class="mini-meta" style="margin:10px 0 12px;">
+                                <span><i class="far fa-calendar"></i>${formatSermonDate(post.date)}</span>
+                            </div>
+                            <p class="announcement-summary">${escapeHtml(post.summary || 'Stay connected with the latest church update.')}</p>
+                        </div>
+                        <div class="announcement-tags">
+                            ${tags.map((tag) => `<span><i class="fas fa-tag"></i>${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+                        <a class="announcement-link" href="${escapeHtml(post.link || '#contact')}">
+                            <i class="fas fa-arrow-right"></i>
+                            ${escapeHtml(post.linkLabel || getDefaultPostLinkLabel(post))}
+                        </a>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        async function fetchPosts() {
+            const sources = ['./posts.json', 'https://raw.githubusercontent.com/simsonpeter/njcbelgium/main/posts.json'];
+            for (const source of sources) {
+                try {
+                    const response = await fetch(source, { cache: 'no-store' });
+                    if (!response.ok) {
+                        continue;
+                    }
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                        return data;
+                    }
+                } catch (error) {
+                    console.warn('Unable to load posts from', source, error);
+                }
+            }
+            throw new Error('Failed to load posts from available sources.');
+        }
+
+        async function loadAnnouncements() {
+            try {
+                const posts = await fetchPosts();
+                renderAnnouncements(posts);
+            } catch (error) {
+                console.error('Error loading announcements:', error);
+                renderAnnouncements([]);
+            }
+        }
+
         function displayEvents(events) {
             const eventsContainer = document.getElementById('events-container');
             const fallbackEvents = [
@@ -1613,6 +1848,7 @@
             playerTitle.textContent = title;
             playerSubtitle.textContent = subtitle;
             playerMeta.innerHTML = `
+                <span><i class="fas fa-tag"></i>Sermon</span>
                 <span><i class="far fa-calendar"></i>${formatSermonDate(sermon.date)}</span>
                 ${speaker}
             `;
@@ -1654,7 +1890,7 @@
                 `;
                 playerTitle.textContent = 'No sermons available';
                 playerSubtitle.textContent = 'Please check back later.';
-                playerMeta.innerHTML = '<span><i class="far fa-calendar"></i>Recent message</span>';
+                playerMeta.innerHTML = '<span><i class="fas fa-tag"></i>Sermon</span><span><i class="far fa-calendar"></i>Recent message</span>';
                 playerButton.disabled = true;
                 playerDownloadLink.href = '#';
                 if (sermonPickerLabel) {
@@ -1676,6 +1912,7 @@
                             <h3>${escapeHtml(sermon.title || 'Sermon')}</h3>
                             <p>${escapeHtml(sermon.subtitle || sermon.speaker || 'Tap to listen')}</p>
                             <span class="mini-meta" style="margin-top:10px;">
+                                <span><i class="fas fa-tag"></i>Sermon</span>
                                 <span><i class="far fa-calendar"></i>${formatSermonDate(sermon.date)}</span>
                                 ${sermon.speaker ? `<span><i class="fas fa-user"></i>${escapeHtml(sermon.speaker)}</span>` : ''}
                             </span>
@@ -1729,6 +1966,7 @@
             const prayerMeetings = getNextPrayerMeetings(belgianDate);
             const allEvents = [sundayService, ...prayerMeetings].sort((a, b) => new Date(a.date) - new Date(b.date));
             displayEvents(allEvents.slice(0, 4));
+            loadAnnouncements();
             loadSermons();
             observeRevealElements();
             observeSections();
