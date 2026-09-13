@@ -154,7 +154,7 @@
         header.is-scrolled {
             background: rgba(8, 21, 37, 0.92);
             backdrop-filter: blur(16px);
-            border-bottom-color: rgba(255, 255, 255, 0.08);
+            border-bottom-color: rgba(212, 168, 74, 0.45);
         }
 
         body.dark-mode header.is-scrolled {
@@ -317,6 +317,7 @@
         .btn-secondary {
             border: 1px solid rgba(247, 241, 230, 0.35);
             color: var(--hero-text);
+            background: transparent;
         }
 
         .quick-tags,
@@ -346,18 +347,16 @@
             width: 100%;
             aspect-ratio: 3 / 4;
             object-fit: cover;
+            object-position: top center;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
             background: rgba(8, 21, 37, 0.35);
         }
 
         .hero-featured-label {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            padding: 8px 12px;
-            background: rgba(8, 21, 37, 0.82);
+            display: block;
+            margin-top: 14px;
             color: var(--gold-bright);
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             letter-spacing: 0.22em;
             text-transform: uppercase;
         }
@@ -402,6 +401,10 @@
         .footer-note,
         .player-subtitle {
             color: var(--muted);
+        }
+
+        .contact-line {
+            display: block;
         }
 
         .about-grid {
@@ -538,28 +541,34 @@
             white-space: nowrap;
         }
 
-        .sermon-shell {
+        .sermon-stage {
             display: grid;
-            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-            gap: 48px;
-            align-items: start;
+            grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .sermon-shell {
+            display: block;
         }
 
         .player-card {
             display: grid;
-            gap: 14px;
+            gap: 12px;
             align-content: start;
         }
 
         .player-art {
-            margin-bottom: 8px;
             background: var(--navy);
+            box-shadow: var(--shadow);
         }
 
         .player-art img {
             width: 100%;
             aspect-ratio: 3 / 4;
             object-fit: cover;
+            object-position: top center;
         }
 
         .player-kicker,
@@ -637,15 +646,19 @@
 
         .sermon-list {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            max-height: 760px;
-            overflow: auto;
-            padding-right: 4px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            max-height: none;
+            overflow: visible;
         }
 
         .sermon-item {
+            appearance: none;
+            display: block;
             width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            overflow: hidden;
             text-align: left;
             padding: 0;
             border: 0;
@@ -655,43 +668,72 @@
         }
 
         .sermon-item-head {
-            display: grid;
-            gap: 10px;
+            display: block;
+            min-width: 0;
         }
 
-        .sermon-thumb {
+        .poster-frame {
+            display: block;
+            position: relative;
             width: 100%;
             aspect-ratio: 3 / 4;
+            overflow: hidden;
+            background: #081525;
+        }
+
+        .poster-frame img,
+        .sermon-thumb {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            max-width: none;
             object-fit: cover;
-            background: var(--paper-soft);
+            object-position: top center;
         }
 
         .sermon-poster-fallback {
-            width: 100%;
-            aspect-ratio: 3 / 4;
             display: grid;
             place-items: center;
-            background: var(--navy);
-            color: var(--gold-bright);
-            font-size: 1.4rem;
+            width: 100%;
+            height: 100%;
+            padding: 16px;
+            background:
+                radial-gradient(circle at top, rgba(224, 183, 90, 0.18), transparent 48%),
+                linear-gradient(180deg, #16324d, #081525);
+            color: #f7f1e6;
+            text-align: center;
+        }
+
+        .sermon-poster-fallback strong {
+            font-family: 'Cormorant Garamond', 'Noto Serif Tamil', serif;
+            font-size: 1.05rem;
+            line-height: 1.3;
+            font-weight: 600;
         }
 
         .sermon-item h3 {
-            margin: 0;
-            font-size: 1rem;
+            margin: 8px 0 0;
+            font-size: 0.95rem;
             line-height: 1.35;
             font-family: 'Cormorant Garamond', 'Noto Serif Tamil', serif;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .sermon-item p {
-            color: var(--muted);
-            font-size: 0.88rem;
-            margin-top: 2px;
+        .sermon-item p,
+        .sermon-item .mini-meta {
+            display: none;
         }
 
-        .sermon-item.active .sermon-thumb,
-        .sermon-item:hover .sermon-thumb,
-        .sermon-item:focus-visible .sermon-thumb {
+        .sermon-item:has(.sermon-poster-fallback) h3 {
+            display: none;
+        }
+
+        .sermon-item.active .poster-frame,
+        .sermon-item:hover .poster-frame,
+        .sermon-item:focus-visible .poster-frame {
             outline: 2px solid var(--gold);
             outline-offset: 3px;
         }
@@ -700,19 +742,51 @@
             display: none;
         }
 
+        #radio {
+            background: #0b1c33;
+        }
+
+        body.dark-mode #radio {
+            background: #10243d;
+        }
+
+        #radio .radio-copy h2 {
+            color: #f7f1e6;
+        }
+
+        #radio .radio-copy p {
+            color: rgba(247, 241, 230, 0.78);
+        }
+
+        #radio .kicker {
+            color: var(--gold-bright);
+        }
+
+        #radio .btn-primary {
+            background: #e0b75a;
+            color: #081525;
+        }
+
         .radio-band {
             display: grid;
             grid-template-columns: minmax(0, 1fr) auto;
             gap: 32px;
             align-items: center;
-            padding: 64px 0;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
+            padding: 8px 0;
         }
 
         .radio-copy h2 {
+            color: #f7f1e6;
             font-size: clamp(2.4rem, 5vw, 4rem);
             margin: 12px 0 14px;
+        }
+
+        .radio-copy p {
+            color: rgba(247, 241, 230, 0.74);
+        }
+
+        #radio .kicker {
+            color: var(--gold-bright);
         }
 
         .contact-address {
@@ -779,7 +853,7 @@
         @media (max-width: 980px) {
             .hero-layout,
             .about-grid,
-            .sermon-shell,
+            .sermon-stage,
             .radio-band,
             .section-heading,
             .life-grid,
@@ -791,6 +865,14 @@
             .hero-featured {
                 justify-self: start;
                 width: min(100%, 360px);
+            }
+
+            .sermon-list {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .player-art {
+                width: min(100%, 320px);
             }
 
             .detail-card + .detail-card,
@@ -806,17 +888,19 @@
             }
 
             nav {
-                position: absolute;
+                position: fixed;
                 top: 84px;
                 left: 0;
                 right: 0;
+                bottom: 0;
                 margin-left: 0;
-                background: var(--navy);
-                padding: 12px 20px 24px;
+                background: rgba(8, 21, 37, 0.97);
+                padding: 28px 24px 40px;
                 opacity: 0;
                 pointer-events: none;
                 transform: translateY(-8px);
                 transition: opacity 0.2s ease, transform 0.2s ease;
+                z-index: 999;
             }
 
             nav.active {
@@ -835,8 +919,8 @@
                 margin-left: auto;
             }
 
-            .header-shell {
-                position: relative;
+            header {
+                background: rgba(8, 21, 37, 0.92);
             }
         }
 
@@ -856,15 +940,25 @@
             }
 
             .sermon-list {
-                display: flex;
-                gap: 14px;
-                overflow-x: auto;
-                max-height: none;
-                padding-bottom: 8px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .sermon-item {
-                min-width: 168px;
+            .player-art {
+                width: 100%;
+            }
+
+            .player-art img {
+                max-height: 360px;
+                aspect-ratio: auto;
+                height: 360px;
+            }
+
+            .hero-featured {
+                width: 100%;
+            }
+
+            .brand-copy span {
+                display: none;
             }
 
             .event-row {
@@ -1013,7 +1107,7 @@
                 </div>
                 <div class="detail-grid">
                     <article class="detail-card reveal">
-                        <span class="icon-chip"><i class="fas fa-sun"></i></span>
+                        <span class="icon-chip"><i class="fas fa-church"></i></span>
                         <h3>Sunday Worship</h3>
                         <p>Every Sunday at 14:30 with worship, prayer, and the Word.</p>
                     </article>
@@ -1063,11 +1157,11 @@
                     <p>Choose a Sunday poster and play the recording.</p>
                 </div>
 
-                <div class="sermon-shell">
+                <div class="sermon-stage">
+                    <figure class="player-art reveal">
+                        <img id="player-artwork" src="https://i.ibb.co/prMjGHJN/file-0000000044008210a832335b55e7d259.png" alt="Selected sermon artwork">
+                    </figure>
                     <article class="player-card reveal">
-                        <figure class="player-art">
-                            <img id="player-artwork" src="https://i.ibb.co/prMjGHJN/file-0000000044008210a832335b55e7d259.png" alt="Selected sermon artwork">
-                        </figure>
                         <span class="player-kicker">Now playing</span>
                         <h3 class="player-title" id="player-title">Loading sermons...</h3>
                         <p class="player-subtitle" id="player-subtitle">Please wait while recent recordings load.</p>
@@ -1086,6 +1180,7 @@
                             <a class="ghost-link" id="player-download-link" href="#" target="_blank" rel="noreferrer">Open audio source</a>
                         </div>
                     </article>
+                </div>
 
                     <article class="sermon-list-card is-open reveal">
                         <span class="card-kicker">Sunday posters</span>
@@ -1110,7 +1205,6 @@
                             </div>
                         </div>
                     </article>
-                </div>
             </div>
         </section>
 
@@ -1600,8 +1694,8 @@
             sermonsContainer.innerHTML = sermonState.map((sermon, index) => {
                 const photo = artworkFor(sermon);
                 const media = photo
-                    ? `<img class="sermon-thumb" src="${escapeHtml(photo)}" alt="">`
-                    : `<span class="sermon-poster-fallback"><i class="fas fa-play"></i></span>`;
+                    ? `<span class="poster-frame"><img class="sermon-thumb" src="${escapeHtml(photo)}" alt=""></span>`
+                    : `<span class="poster-frame"><span class="sermon-poster-fallback"><strong>${escapeHtml(sermon.title || 'Sermon')}</strong></span></span>`;
                 return `
                 <button class="sermon-item${index === 0 ? ' active' : ''}" type="button" data-index="${index}">
                     <span class="sermon-item-head">
